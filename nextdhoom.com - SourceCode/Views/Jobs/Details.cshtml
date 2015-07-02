@@ -1,0 +1,108 @@
+﻿@model WebApplication13.Models.joblistn
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Members.cshtml";
+}
+
+<h2>Job Details</h2>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=366833086807642&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+    </script>
+	<hr />
+    <table width="100%">
+        <tr>
+            
+            <td>
+                posted By <br />
+            @Model.Mem.fname<br />
+            <img src="@Model.Mem.gimg" />
+            </td>
+        <td>
+            @Model.designation <br />
+            Posted On: @Model.sysentrydate
+        </td>
+        </tr>
+        <tr>
+            <td><br /></td>
+            <td><br /></td>
+        </tr>
+                
+                    <tr>
+                        <td>Exp</td>
+                        <td>@Model.minexp - @Model.maxexp</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>@Model.email</td>
+                    </tr>
+        <tr>
+            <td colspan="2"><br /><br />
+                <!-- Place this tag in your head or just before your close body tag. -->
+                <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+                <!-- Place this tag where you want the share button to render. -->
+                <div class="g-plus" data-action="share" data-height="24"></div>
+                
+               <div class="fb-share-button"></div>
+            
+                <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
+                <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+            <br /><br /><br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Location 
+            </td>
+            <td>
+                
+                @Model.Country.countryname - @Model.state.statename - @Model.citytable.cityname
+            </td>
+        </tr>
+                    <tr>
+                        <td>Telephone</td>
+                        <td>@Model.telephone</td>
+                    </tr>
+                    <tr>
+                        <td>Contact Person</td>
+                        <td>@Model.contact</td>
+                    </tr>
+                    <tr>
+                        <td>Salary</td>
+                        <td>@Model.salary</td>
+                    </tr>
+                    <tr>
+                        <td>Job Category</td>
+                        <td>
+                            @Model.jobcategory.category
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Website</td>
+                        <td>
+                            <a href="@Model.website" target="_blank" >@Model.website</a>
+                        </td>
+                    </tr>
+        <tr>
+            <td colspan="2">
+                <br /><br />
+                <span style="white-space: pre-line">
+                    @Model.jobdescription
+                    </span>
+</td>
+        </tr>
+                </table>
+            
+    
+
+<p>
+    
+    @Html.ActionLink("Back to List", "Index")
+</p>

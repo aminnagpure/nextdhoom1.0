@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="jumbotron">
+    <h2>Content Manage</h2>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Forum</th>
+            <th>User</th>
+            <th>Jobs</th>
+        </tr>
+
+        <tr>
+            <td>
+                <ul class="list-unstyled">
+                    <li>@Html.ActionLink("Add Category", "InsertCategory", "ContentManage") </li>
+                    <li>@Html.ActionLink("Add SubCategory", "InsertSubCategory", "ContentManage") </li>
+                    <li>@Html.ActionLink("Approved Topics", "ViewAprovedTopics")</li>
+                    <li>@Html.ActionLink("UnApproved Topics", "ViewUnAproveTopic")</li>
+                    <li>@Html.ActionLink("Approved Replies", "ViewAprovedAnswer")</li>
+                    <li>@Html.ActionLink("UnApproved Replies", "ViewUnAprovedAnswer")</li>
+                </ul>
+
+
+            </td>
+            <td>
+                <ul class="list-unstyled">
+                    <li>@Html.ActionLink("Total Registered", "AllMem")</li>
+                    <li>@Html.ActionLink("Suspended Users", "ViewSuspMem")</li>
+                </ul>
+            </td>
+            <td>
+                <ul class="list-unstyled">
+
+                    <li>@Html.ActionLink("Approved Jobs", "ViewAproveJob")</li>
+                    <li>@Html.ActionLink("UnApproved Jobs", "ViewUnAproveJob")</li>
+
+                </ul>
+            </td>
+        </tr>
+    </table>
+</div> 

@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="nextdhoomModelStoreContainer" CdmEntityContainer="nextdhoomEntities">
+    <EntitySetMapping Name="citytables">
+      <EntityTypeMapping TypeName="nextdhoomModel.citytable">
+        <MappingFragment StoreEntitySet="citytable">
+          <ScalarProperty Name="cityname" ColumnName="cityname" />
+          <ScalarProperty Name="cityid" ColumnName="cityid" />
+          <ScalarProperty Name="stateid" ColumnName="stateid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="nextdhoomModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="COUNTRYID" ColumnName="COUNTRYID" />
+          <ScalarProperty Name="countryname" ColumnName="countryname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="meminvites">
+      <EntityTypeMapping TypeName="nextdhoomModel.meminvite">
+        <MappingFragment StoreEntitySet="meminvites">
+          <ScalarProperty Name="inviteid" ColumnName="inviteid" />
+          <ScalarProperty Name="memsid" ColumnName="memsid" />
+          <ScalarProperty Name="useremail" ColumnName="useremail" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="lname" ColumnName="lname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mems">
+      <EntityTypeMapping TypeName="nextdhoomModel.Mem">
+        <MappingFragment StoreEntitySet="Mems">
+          <ScalarProperty Name="sponsoremail" ColumnName="sponsoremail" />
+          <ScalarProperty Name="jobcategoryid" ColumnName="jobcategoryid" />
+          <ScalarProperty Name="designation" ColumnName="designation" />
+          <ScalarProperty Name="isJobseeker" ColumnName="isJobseeker" />
+          <ScalarProperty Name="regDate" ColumnName="regDate" />
+          <ScalarProperty Name="susp" ColumnName="susp" />
+          <ScalarProperty Name="memsid" ColumnName="memsid" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="lname" ColumnName="lname" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="passw" ColumnName="passw" />
+          <ScalarProperty Name="photoid" ColumnName="photoid" />
+          <ScalarProperty Name="countryid" ColumnName="countryid" />
+          <ScalarProperty Name="stateid" ColumnName="stateid" />
+          <ScalarProperty Name="cityid" ColumnName="cityid" />
+          <ScalarProperty Name="gurl" ColumnName="gurl" />
+          <ScalarProperty Name="gimg" ColumnName="gimg" />
+          <ScalarProperty Name="aboutme" ColumnName="aboutme" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Photos">
+      <EntityTypeMapping TypeName="nextdhoomModel.Photo">
+        <MappingFragment StoreEntitySet="Photos">
+          <ScalarProperty Name="photoname" ColumnName="photoname" />
+          <ScalarProperty Name="passw" ColumnName="passw" />
+          <ScalarProperty Name="uploaddate" ColumnName="uploaddate" />
+          <ScalarProperty Name="mainphoto" ColumnName="mainphoto" />
+          <ScalarProperty Name="isapproved" ColumnName="isapproved" />
+          <ScalarProperty Name="memsid" ColumnName="memsid" />
+          <ScalarProperty Name="photoid" ColumnName="photoid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="states">
+      <EntityTypeMapping TypeName="nextdhoomModel.state">
+        <MappingFragment StoreEntitySet="states">
+          <ScalarProperty Name="countryid" ColumnName="countryid" />
+          <ScalarProperty Name="statename" ColumnName="statename" />
+          <ScalarProperty Name="stateid" ColumnName="stateid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="nextdhoomModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Editmem" FunctionName="nextdhoomModel.Store.Editmem" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="nextdhoomModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="nextdhoomModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="nextdhoomModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="nextdhoomModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="nextdhoomModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="nextdhoomModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="nextdhoomModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="nextdhoomModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="nextdhoomModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="viewprofilemem" FunctionName="nextdhoomModel.Store.viewprofilemem">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="nextdhoomModel.viewprofilemem_Result">
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="lname" ColumnName="lname" />
+          <ScalarProperty Name="countryname" ColumnName="countryname" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="jobcategories">
+      <EntityTypeMapping TypeName="nextdhoomModel.jobcategory">
+        <MappingFragment StoreEntitySet="jobcategory">
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="jobcategoryid" ColumnName="jobcategoryid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="joblistns">
+      <EntityTypeMapping TypeName="nextdhoomModel.joblistn">
+        <MappingFragment StoreEntitySet="joblistn">
+          <ScalarProperty Name="isApproved" ColumnName="isApproved" />
+          <ScalarProperty Name="website" ColumnName="website" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+          <ScalarProperty Name="contact" ColumnName="contact" />
+          <ScalarProperty Name="cityid" ColumnName="cityid" />
+          <ScalarProperty Name="stateid" ColumnName="stateid" />
+          <ScalarProperty Name="countryid" ColumnName="countryid" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+          <ScalarProperty Name="maxexp" ColumnName="maxexp" />
+          <ScalarProperty Name="minexp" ColumnName="minexp" />
+          <ScalarProperty Name="jobdescription" ColumnName="jobdescription" />
+          <ScalarProperty Name="designation" ColumnName="designation" />
+          <ScalarProperty Name="sysentrydate" ColumnName="sysentrydate" />
+          <ScalarProperty Name="jobcategoryid" ColumnName="jobcategoryid" />
+          <ScalarProperty Name="memsid" ColumnName="memsid" />
+          <ScalarProperty Name="Jobid" ColumnName="Jobid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ForumMainCategories">
+      <EntityTypeMapping TypeName="nextdhoomModel.ForumMainCategory">
+        <MappingFragment StoreEntitySet="ForumMainCategory">
+          <ScalarProperty Name="memsid" ColumnName="memsid" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="descrip" ColumnName="descrip" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="catid" ColumnName="catid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ForumSubCategories">
+      <EntityTypeMapping TypeName="nextdhoomModel.ForumSubCategory">
+        <MappingFragment StoreEntitySet="ForumSubCategory">
+          <ScalarProperty Name="memsid" ColumnName="memsid" />
+          <ScalarProperty Name="TotalView" ColumnName="TotalView" />
+          <ScalarProperty Name="IsApprover" ColumnName="IsApprover" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="LastTopic" ColumnName="LastTopic" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="StartedBy" ColumnName="StartedBy" />
+          <ScalarProperty Name="SubCatDesc" ColumnName="SubCatDesc" />
+          <ScalarProperty Name="SubCatTitle" ColumnName="SubCatTitle" />
+          <ScalarProperty Name="CatId" ColumnName="CatId" />
+          <ScalarProperty Name="SubCatId" ColumnName="SubCatId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ForumTopics">
+      <EntityTypeMapping TypeName="nextdhoomModel.ForumTopic">
+        <MappingFragment StoreEntitySet="ForumTopic">
+          <ScalarProperty Name="memsid" ColumnName="memsid" />
+          <ScalarProperty Name="TotalView" ColumnName="TotalView" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="LastAnsId" ColumnName="LastAnsId" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="UpdateCandiId" ColumnName="UpdateCandiId" />
+          <ScalarProperty Name="UpdateCandiName" ColumnName="UpdateCandiName" />
+          <ScalarProperty Name="SubCatId" ColumnName="SubCatId" />
+          <ScalarProperty Name="catid" ColumnName="catid" />
+          <ScalarProperty Name="TopicDesc" ColumnName="TopicDesc" />
+          <ScalarProperty Name="TopicTitle" ColumnName="TopicTitle" />
+          <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ForumTopicAnswers">
+      <EntityTypeMapping TypeName="nextdhoomModel.ForumTopicAnswer">
+        <MappingFragment StoreEntitySet="ForumTopicAnswer">
+          <ScalarProperty Name="memsid" ColumnName="memsid" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="AnsDate" ColumnName="AnsDate" />
+          <ScalarProperty Name="TopicAns" ColumnName="TopicAns" />
+          <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+          <ScalarProperty Name="AnsId" ColumnName="AnsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ForumAddCategory" FunctionName="nextdhoomModel.Store.ForumAddCategory" />
+    <FunctionImportMapping FunctionImportName="forumCheckSubCat" FunctionName="nextdhoomModel.Store.forumCheckSubCat" />
+    <FunctionImportMapping FunctionImportName="ForumdeleteAnswer" FunctionName="nextdhoomModel.Store.ForumdeleteAnswer" />
+    <FunctionImportMapping FunctionImportName="ForumDeleteCategory" FunctionName="nextdhoomModel.Store.ForumDeleteCategory" />
+    <FunctionImportMapping FunctionImportName="forumdeleteTopic" FunctionName="nextdhoomModel.Store.forumdeleteTopic" />
+    <FunctionImportMapping FunctionImportName="forumgetAllCategory" FunctionName="nextdhoomModel.Store.forumgetAllCategory">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="nextdhoomModel.forumgetAllCategory_Result">
+          <ScalarProperty Name="catid" ColumnName="catid" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="descrip" ColumnName="descrip" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ForumgetSubCategory" FunctionName="nextdhoomModel.Store.ForumgetSubCategory" />
+    <FunctionImportMapping FunctionImportName="ForumgetTopicAnswer" FunctionName="nextdhoomModel.Store.ForumgetTopicAnswer" />
+    <FunctionImportMapping FunctionImportName="ForumgetTopicDetails" FunctionName="nextdhoomModel.Store.ForumgetTopicDetails" />
+    <FunctionImportMapping FunctionImportName="ForumgetTopics" FunctionName="nextdhoomModel.Store.ForumgetTopics">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="nextdhoomModel.ForumgetTopics_Result">
+          <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+          <ScalarProperty Name="CatId" ColumnName="CatId" />
+          <ScalarProperty Name="TopicTitle" ColumnName="TopicTitle" />
+          <ScalarProperty Name="TopicDesc" ColumnName="TopicDesc" />
+          <ScalarProperty Name="memsid" ColumnName="memsid" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="starteddate" ColumnName="starteddate" />
+          <ScalarProperty Name="UpdateCandiId" ColumnName="UpdateCandiId" />
+          <ScalarProperty Name="updatedate" ColumnName="updatedate" />
+          <ScalarProperty Name="ReplayCount" ColumnName="ReplayCount" />
+          <ScalarProperty Name="UpdateCandiName" ColumnName="UpdateCandiName" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="updateddate" ColumnName="updateddate" />
+          <ScalarProperty Name="rowid" ColumnName="rowid" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ForumgetUnApproveAnswer" FunctionName="nextdhoomModel.Store.ForumgetUnApproveAnswer" />
+    <FunctionImportMapping FunctionImportName="ForumgetUnApproveTopics" FunctionName="nextdhoomModel.Store.ForumgetUnApproveTopics" />
+    <FunctionImportMapping FunctionImportName="forumInsertAnswer" FunctionName="nextdhoomModel.Store.forumInsertAnswer" />
+    <FunctionImportMapping FunctionImportName="forumInsertTopic" FunctionName="nextdhoomModel.Store.forumInsertTopic" />
+    <EntitySetMapping Name="NewsCatmasters">
+      <EntityTypeMapping TypeName="nextdhoomModel.NewsCatmaster">
+        <MappingFragment StoreEntitySet="NewsCatmaster">
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="catid" ColumnName="catid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Jokescatmasters">
+      <EntityTypeMapping TypeName="nextdhoomModel.Jokescatmaster">
+        <MappingFragment StoreEntitySet="Jokescatmaster">
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="catid" ColumnName="catid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Jokes">
+      <EntityTypeMapping TypeName="nextdhoomModel.tbl_Jokes">
+        <MappingFragment StoreEntitySet="tbl_Jokes">
+          <ScalarProperty Name="TotalView" ColumnName="TotalView" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="ipaddress" ColumnName="ipaddress" />
+          <ScalarProperty Name="Jokespic" ColumnName="Jokespic" />
+          <ScalarProperty Name="JokesDesc" ColumnName="JokesDesc" />
+          <ScalarProperty Name="Jokessub" ColumnName="Jokessub" />
+          <ScalarProperty Name="Jokesdate" ColumnName="Jokesdate" />
+          <ScalarProperty Name="memsid" ColumnName="memsid" />
+          <ScalarProperty Name="Jokesid" ColumnName="Jokesid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="forumInsertSubCat" FunctionName="nextdhoomModel.Store.forumInsertSubCat" />
+    <FunctionImportMapping FunctionImportName="ForumAproveTopic" FunctionName="nextdhoomModel.Store.ForumAproveTopic" />
+    <FunctionImportMapping FunctionImportName="ForumAproveTopicAns" FunctionName="nextdhoomModel.Store.ForumAproveTopicAns" />
+    <FunctionImportMapping FunctionImportName="ForumUnAproveTopic" FunctionName="nextdhoomModel.Store.ForumUnAproveTopic" />
+    <FunctionImportMapping FunctionImportName="ForumUnAproveTopicAns" FunctionName="nextdhoomModel.Store.ForumUnAproveTopicAns" />
+    <FunctionImportMapping FunctionImportName="ResumeMem" FunctionName="nextdhoomModel.Store.ResumeMem" />
+    <FunctionImportMapping FunctionImportName="SuspendMem" FunctionName="nextdhoomModel.Store.SuspendMem" />
+    <FunctionImportMapping FunctionImportName="jobApprove" FunctionName="nextdhoomModel.Store.jobApprove" />
+    <FunctionImportMapping FunctionImportName="jobUnApprove" FunctionName="nextdhoomModel.Store.jobUnApprove" />
+    <EntitySetMapping Name="User_Complaints">
+      <EntityTypeMapping TypeName="nextdhoomModel.User_Complaints">
+        <MappingFragment StoreEntitySet="User_Complaints">
+          <ScalarProperty Name="ResolvedByName" ColumnName="ResolvedByName" />
+          <ScalarProperty Name="ResolvedBy" ColumnName="ResolvedBy" />
+          <ScalarProperty Name="ResolvedDate" ColumnName="ResolvedDate" />
+          <ScalarProperty Name="IsResolved" ColumnName="IsResolved" />
+          <ScalarProperty Name="ComplaintDate" ColumnName="ComplaintDate" />
+          <ScalarProperty Name="ComplaintDesc" ColumnName="ComplaintDesc" />
+          <ScalarProperty Name="ComplaintHead" ColumnName="ComplaintHead" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="UserMobile" ColumnName="UserMobile" />
+          <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Complaints_Comments">
+      <EntityTypeMapping TypeName="nextdhoomModel.User_Complaints_Comments">
+        <MappingFragment StoreEntitySet="User_Complaints_Comments">
+          <ScalarProperty Name="CommentsDate" ColumnName="CommentsDate" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="CommentsByName" ColumnName="CommentsByName" />
+          <ScalarProperty Name="CommentsBy" ColumnName="CommentsBy" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="ComplaintsID" ColumnName="ComplaintsID" />
+          <ScalarProperty Name="CommentsID" ColumnName="CommentsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="User_Complaints_Add" FunctionName="nextdhoomModel.Store.User_Complaints_Add" />
+    <FunctionImportMapping FunctionImportName="User_Complaints_Comments_Add" FunctionName="nextdhoomModel.Store.User_Complaints_Comments_Add" />
+    <FunctionImportMapping FunctionImportName="User_Complaints_VerifyUser" FunctionName="nextdhoomModel.Store.User_Complaints_VerifyUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="nextdhoomModel.User_Complaints_VerifyUser_Result">
+          <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+          <ScalarProperty Name="UserMobile" ColumnName="UserMobile" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ComplaintHead" ColumnName="ComplaintHead" />
+          <ScalarProperty Name="ComplaintDesc" ColumnName="ComplaintDesc" />
+          <ScalarProperty Name="ComplaintDate" ColumnName="ComplaintDate" />
+          <ScalarProperty Name="IsResolved" ColumnName="IsResolved" />
+          <ScalarProperty Name="ResolvedDate" ColumnName="ResolvedDate" />
+          <ScalarProperty Name="ResolvedBy" ColumnName="ResolvedBy" />
+          <ScalarProperty Name="ResolvedByName" ColumnName="ResolvedByName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UserComplaints_Comments_Delete" FunctionName="nextdhoomModel.Store.UserComplaints_Comments_Delete" />
+    <FunctionImportMapping FunctionImportName="UserComplaints_Delete" FunctionName="nextdhoomModel.Store.UserComplaints_Delete" />
+    <FunctionImportMapping FunctionImportName="insertNewCar" FunctionName="nextdhoomModel.Store.insertNewCar" />
+    <FunctionImportMapping FunctionImportName="MyJob_Search" FunctionName="nextdhoomModel.Store.Job_Search" />
+    <FunctionImportMapping FunctionImportName="Job_Search" FunctionName="nextdhoomModel.Store.Job_Search" />
+    <FunctionImportMapping FunctionImportName="jobbySearchnpage" FunctionName="nextdhoomModel.Store.jobbySearchnpage">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="nextdhoomModel.jobbySearchnpage_Result">
+          <ScalarProperty Name="Jobid" ColumnName="Jobid" />
+          <ScalarProperty Name="designation" ColumnName="designation" />
+          <ScalarProperty Name="jobdescription" ColumnName="jobdescription" />
+          <ScalarProperty Name="minexp" ColumnName="minexp" />
+          <ScalarProperty Name="maxexp" ColumnName="maxexp" />
+          <ScalarProperty Name="sysentrydate" ColumnName="sysentrydate" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="cityname" ColumnName="cityname" />
+          <ScalarProperty Name="countryname" ColumnName="countryname" />
+          <ScalarProperty Name="statename" ColumnName="statename" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="gimg" ColumnName="gimg" />
+          <ScalarProperty Name="rowid" ColumnName="rowid" />
+          <ScalarProperty Name="memsid" ColumnName="memsid" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="memberbySearch" FunctionName="nextdhoomModel.Store.memberbySearch">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="nextdhoomModel.memberbySearch_Result">
+          <ScalarProperty Name="memsid" ColumnName="memsid" />
+          <ScalarProperty Name="gimg" ColumnName="gimg" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="lname" ColumnName="lname" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="aboutme" ColumnName="aboutme" />
+          <ScalarProperty Name="countryname" ColumnName="countryname" />
+          <ScalarProperty Name="statename" ColumnName="statename" />
+          <ScalarProperty Name="cityname" ColumnName="cityname" />
+          <ScalarProperty Name="rowid" ColumnName="rowid" />
+          <ScalarProperty Name="regdate" ColumnName="regdate" />
+          <ScalarProperty Name="susp" ColumnName="susp" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

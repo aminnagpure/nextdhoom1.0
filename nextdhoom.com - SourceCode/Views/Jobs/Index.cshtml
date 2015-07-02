@@ -1,0 +1,145 @@
+﻿@model WebApplication13.Models.jobsbyPaging 
+
+@{
+    ViewBag.Title = "Job List";
+
+ int totalcount = Convert.ToInt32(Model.TotalCount);
+    WebGrid grid = new WebGrid(rowsPerPage: Model.pagesize, ajaxUpdateContainerId: "grid2");
+    grid.Bind(Model.data,
+              autoSortAndPage: false,
+              rowCount: totalcount
+
+    );
+
+}
+
+
+<style>
+    .table tfoot td a {
+        padding: 2px 8px;
+        background-color: #EBEBEB;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        color: #888888;
+        font-size: smaller;
+    }
+
+    .table#gridpager thead th a {
+        padding: 2px 8px;
+        background-color: #EBEBEB;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        color: #888888;
+        font-size: smaller;
+    }
+</style>
+<div class="page-header">
+    <h2>Jobs</h2>
+
+    <p>
+        @Html.ActionLink("Post Job", "Create")
+    </p>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Jobs
+        </div>
+        <div class="panel-body">
+
+
+
+
+
+
+
+
+
+
+            <p class="small"> <b>@Html.Label("Total records: ")</b> @Html.Label(grid.TotalRowCount.ToString())</p>
+            <table class="table table-striped" id="gridpager">
+                <thead>
+                    <tr>
+                        <th>  @grid.Pager()</th>
+                    </tr>
+                </thead>
+            </table>
+            @grid.GetHtml(htmlAttributes: new { id = "grid2" },
+    fillEmptyRows: false,
+                 tableStyle: "table table-striped ",
+
+        mode: WebGridPagerModes.All,
+columns: new[] {
+      grid.Column("Name",
+
+                 format:
+                @<text> <a href="@Url.Action("ViewProfile", "members", new { id = item.memsid })"> @item.fname</a>
+                <br /><div><img src="@item.gimg" class="img-thumbnail thumbnail" /></div>
+
+                </text>
+                ),
+    //grid.Column("fname","Name"),
+    //grid.Column("Category"),
+    //grid.Column("designation"),
+    //grid.Column("jobdescription"),
+    //item.YourField.ToString().Length <= n ? item.YourField.ToString() : item.YourField.ToString().SubString(0,n) + "..."
+    grid.Column("jobdescription", "Description", format:@<text>
+        <h4><a href="@Url.Action("details", "Jobs", new { id = item.Jobid })">@item.designation</a><small>(@item.Category)</small></h4>
+        <p>@(item.jobdescription.ToString().Length <= 500 ? item.jobdescription : item.jobdescription.ToString().Substring(0, 500))</p>
+        <p class="text-right"><small>@item.sysentrydate</small> || <small>Exp : @item.minexp - @item.maxexp</small> || <small>Location : @item.countryname - @item.statename - @item.cityname</small></p>
+    </text>),
+
+   
+
+})
+
+        </div>
+        
+    </div>
+
+</div>
+
+@*<script src="~/Scripts/otf.js"></script>
+<h2>Jobs</h2>
+
+<p>
+    @Html.ActionLink("Post Job", "Create")
+</p>
+<div class="PagedList">
+    
+
+</div>
+<table class="table">
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td width="30%">
+
+                @Html.ActionLink(item.Mem.fname + " " + item.Mem.lname, "ViewProfile", "members", new { id = item.Mem.memsid }, null)<br />
+                <img src="@item.Mem.gimg" /> <br />
+                Posted on:@Html.DisplayFor(modelItem => item.sysentrydate)<br />
+
+                Exp:@Html.DisplayFor(modelItem => item.minexp)-
+                @Html.DisplayFor(modelItem => item.maxexp)<br />
+
+                @Html.DisplayFor(modelItem => item.Country.countryname)<br />
+                @Html.DisplayFor(modelItem => item.state.statename)<br />
+                @Html.DisplayFor(modelItem => item.citytable.cityname)<br />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.jobcategory.category)<br />
+
+            @Html.ActionLink(item.designation, "details", "Jobs", new { id = item.Jobid }, null)<br />
+            <div style="overflow:hidden;text-overflow:ellipsis">
+                @{string description = @item.jobdescription.Replace(Environment.NewLine, "<br />");}
+                @Html.Raw("<p>" + @description + "</p>")
+                @Html.DisplayFor(modelItem => @item.jobdescription)
+            </div>
+        </td>
+
+
+    </tr>
+    }
+
+</table>*@

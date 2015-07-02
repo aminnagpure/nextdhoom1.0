@@ -1,0 +1,120 @@
+﻿@model WebApplication13.Models.ForumTopic
+
+@{
+    ViewBag.Title = "DelTopic";
+}
+
+<h2>DelTopic</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ForumTopic</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TopicTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TopicTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TopicDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TopicDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateCandiName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateCandiName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateCandiId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateCandiId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastAnsId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastAnsId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsApproved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsApproved)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalView)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalView)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ForumMainCategory.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ForumMainCategory.Category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ForumSubCategory.SubCatTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ForumSubCategory.SubCatTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mem.fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mem.fname)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

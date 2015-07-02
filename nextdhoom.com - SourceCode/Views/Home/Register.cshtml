@@ -1,0 +1,186 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+ 
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <style type="text/css">
+        .Gplus {
+            background: url('../images/Red-signin-Long-base-20dp.png');
+            background-repeat: no-repeat;
+            padding: 0;
+            border: 0px;
+            cursor: pointer;
+            background-position-x: -9px;
+            background-position-y: -9px;
+        }
+
+            .Gplus:hover {
+                background: url('../images/Red-signin-Long-hover-20dp.png');
+                background-repeat: no-repeat;
+                padding: 0;
+                border: 0px;
+                cursor: pointer;
+                background-position-x: -9px;
+                background-position-y: -9px;
+            }
+    </style>
+</head>
+<body>
+    <br /><br />
+    <br />
+    <br />
+    <center>
+        <button id="authorize-button" style="visibility:hidden; width: 288px; height: 55px;"
+                class="Gplus"></button>
+    </center>
+
+    <center>
+        <input type="submit" id="btnContinue" style="visibility:hidden; width: 206px; height: 49px;" value="Click Here To Continue" onclick="window.location='../members/';return false;" />
+        <h2>
+            All Verified Members, Connected With Social Networking Websites, Google+ and Facebook
+            <br />You can Also Add Employers On Your Facebook and G+
+        </h2>
+    </center>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+         var clientId = 'clientid';
+        var apiKey = 'apikey';
+
+        var scopes = 'https://www.googleapis.com/auth/userinfo.email https://www.google.com/m8/feeds'; //  https://www.google.com/m8/feeds'; // https://www.googleapis.com/auth/userinfo.email';// https://www.google.com/m8/feeds';  //https://www.googleapis.com/auth/plus.me'; //'https://www.google.com/m8/feeds/';  //
+
+        var D;
+
+        // Use a button to handle authentication the first time.
+        function handleClientLoad() {
+            gapi.client.setApiKey(apiKey);
+            window.setTimeout(checkAuth, 1);
+            
+        }
+
+        function checkAuth() {
+            gapi.auth.authorize({ client_id: clientId, scope: scopes, immediate: true }, handleAuthResult);
+        }
+
+
+        function handleAuthResult(authResult) {
+            var authorizeButton = document.getElementById('authorize-button');
+            if (authResult && !authResult.error) {
+                authorizeButton.style.visibility = 'hidden';
+                document.getElementById('content').innerHTML = "";
+                var heading = document.createElement('h4');
+                var image = document.createElement('img');
+                image.src = "http://www.hrwing.com/Images/wait_CW.gif";
+                heading.appendChild(image);
+                document.getElementById('content').appendChild(heading);
+
+                makeApiCall();
+                document.getElementById('content').innerHTML = "";
+                heading = document.createElement('h4');
+                image = document.createElement('img');
+                image.src = "http://www.hrwing.com/Images/wait_AC.gif";
+                heading.appendChild(image);
+                document.getElementById('content').appendChild(heading);
+
+                getContact(authResult);
+                Redirect();
+
+            } else {
+                authorizeButton.style.visibility = '';
+                authorizeButton.onclick = handleAuthClick;
+            }
+            
+            
+
+        }
+        function getContact(a) {
+
+            var authParams = { access_token: a.access_token, token_type: a.token_type, 'max-results': '9999', alt: 'json' }; // from Google oAuth
+
+            $.ajax({
+                url: 'https://www.google.com/m8/feeds/contacts/default/full',
+                dataType: 'jsonp',
+                data: authParams,
+                success: function (data) {
+                    //C = data;
+                    ReadContact(data);
+                }
+            });
+
+        }
+
+        function handleAuthClick(event) {
+            gapi.auth.authorize({ client_id: clientId, scope: scopes, immediate: false }, handleAuthResult);
+            return false;
+        }
+
+        // Load the API and make an API call.  Display the results on the screen.
+        function makeApiCall() {
+            gapi.client.load('plus', 'v1', function () {
+                var request = gapi.client.plus.people.get({
+                    'userId': 'me'
+                });
+                request.execute(function (resp) {
+                    // alert(resp);
+                    D = resp;
+                    Dosomething();
+
+
+                });
+            });
+        }
+
+       
+    </script>
+
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+    <script>
+        function Dosomething() {
+            var dd = 'A';
+            $.ajax({
+                type: "POST",
+                url: "addmem",
+                data: "{UD: " + JSON.stringify(D) + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                
+            });
+        }
+
+    </script>
+    <script>
+        function ReadContact(C) {
+            var dd = 'A';
+            $.ajax({
+                type: "POST",
+                url: "readcont",
+                data: "{UD: " + JSON.stringify(C) + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",               
+            });
+        }
+
+        function Redirect() {
+            //window.location = '../members/';
+            document.getElementById('content').innerHTML = "";
+            var linkbtn = document.getElementById('btnContinue');
+            linkbtn.style.visibility = '';
+        }
+    </script>
+    <center><div id="content"></div></center>
+    <br /><br />
+    <asp:HiddenField ID="referby" runat="server" />
+    
+</body>
+</html>

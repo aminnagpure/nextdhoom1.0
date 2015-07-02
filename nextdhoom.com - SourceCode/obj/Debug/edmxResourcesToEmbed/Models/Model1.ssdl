@@ -1,0 +1,815 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="nextdhoomModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="citytable">
+    <Key>
+      <PropertyRef Name="cityid" />
+    </Key>
+    <Property Name="cityname" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="cityid" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="stateid" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="COUNTRYID" />
+    </Key>
+    <Property Name="COUNTRYID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="countryname" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ForumMainCategory">
+    <Key>
+      <PropertyRef Name="catid" />
+    </Key>
+    <Property Name="catid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="descrip" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="memsid" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ForumSubCategory">
+    <Key>
+      <PropertyRef Name="SubCatId" />
+    </Key>
+    <Property Name="SubCatId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CatId" Type="bigint" Nullable="false" />
+    <Property Name="SubCatTitle" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="SubCatDesc" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="StartedBy" Type="bigint" Nullable="false" />
+    <Property Name="UpdatedBy" Type="bigint" />
+    <Property Name="LastTopic" Type="bigint" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="IsApprover" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="TotalView" Type="bigint" Nullable="false" />
+    <Property Name="memsid" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ForumTopic">
+    <Key>
+      <PropertyRef Name="TopicId" />
+    </Key>
+    <Property Name="TopicId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TopicTitle" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="TopicDesc" Type="nvarchar(max)" />
+    <Property Name="catid" Type="bigint" Nullable="false" />
+    <Property Name="SubCatId" Type="bigint" Nullable="false" />
+    <Property Name="UpdateCandiName" Type="varchar" MaxLength="250" />
+    <Property Name="UpdateCandiId" Type="bigint" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="LastAnsId" Type="bigint" />
+    <Property Name="IsApproved" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="TotalView" Type="bigint" Nullable="false" />
+    <Property Name="memsid" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ForumTopicAnswer">
+    <Key>
+      <PropertyRef Name="AnsId" />
+    </Key>
+    <Property Name="AnsId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TopicId" Type="bigint" Nullable="false" />
+    <Property Name="TopicAns" Type="varchar" MaxLength="5000" Nullable="false" />
+    <Property Name="AnsDate" Type="datetime" Nullable="false" />
+    <Property Name="IsApproved" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="memsid" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="jobcategory">
+    <Key>
+      <PropertyRef Name="jobcategoryid" />
+    </Key>
+    <Property Name="jobcategoryid" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="joblistn">
+    <Key>
+      <PropertyRef Name="Jobid" />
+    </Key>
+    <Property Name="Jobid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="memsid" Type="bigint" Nullable="false" />
+    <Property Name="jobcategoryid" Type="smallint" Nullable="false" />
+    <Property Name="sysentrydate" Type="datetime" Nullable="false" />
+    <Property Name="designation" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="jobdescription" Type="varchar" MaxLength="2000" Nullable="false" />
+    <Property Name="minexp" Type="int" Nullable="false" />
+    <Property Name="maxexp" Type="int" Nullable="false" />
+    <Property Name="salary" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="countryid" Type="smallint" Nullable="false" />
+    <Property Name="stateid" Type="smallint" Nullable="false" />
+    <Property Name="cityid" Type="smallint" Nullable="false" />
+    <Property Name="contact" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="telephone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="website" Type="varchar" MaxLength="4000" Nullable="false" />
+    <Property Name="isApproved" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Jokescatmaster">
+    <Key>
+      <PropertyRef Name="catid" />
+    </Key>
+    <Property Name="catid" Type="int" Nullable="false" />
+    <Property Name="category" Type="varchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="meminvites">
+    <Key>
+      <PropertyRef Name="inviteid" />
+    </Key>
+    <Property Name="inviteid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="memsid" Type="bigint" Nullable="false" />
+    <Property Name="useremail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="fname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mems">
+    <Key>
+      <PropertyRef Name="memsid" />
+    </Key>
+    <Property Name="memsid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="gender" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="passw" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="photoid" Type="bigint" Nullable="false" />
+    <Property Name="countryid" Type="smallint" Nullable="false" />
+    <Property Name="stateid" Type="smallint" Nullable="false" />
+    <Property Name="cityid" Type="smallint" Nullable="false" />
+    <Property Name="gurl" Type="varchar" MaxLength="550" Nullable="false" />
+    <Property Name="gimg" Type="varchar" MaxLength="650" Nullable="false" />
+    <Property Name="aboutme" Type="varchar" MaxLength="450" Nullable="false" />
+    <Property Name="susp" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="regDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="isJobseeker" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="designation" Type="varchar" MaxLength="250" />
+    <Property Name="jobcategoryid" Type="smallint" />
+    <Property Name="sponsoremail" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NewsCatmaster">
+    <Key>
+      <PropertyRef Name="catid" />
+    </Key>
+    <Property Name="catid" Type="int" Nullable="false" />
+    <Property Name="category" Type="varchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Photos">
+    <Key>
+      <PropertyRef Name="photoid" />
+    </Key>
+    <Property Name="photoname" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="passw" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="uploaddate" Type="smalldatetime" Nullable="false" />
+    <Property Name="mainphoto" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="isapproved" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="memsid" Type="bigint" Nullable="false" />
+    <Property Name="photoid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="states">
+    <Key>
+      <PropertyRef Name="stateid" />
+    </Key>
+    <Property Name="countryid" Type="smallint" Nullable="false" />
+    <Property Name="statename" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="stateid" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tbl_Jokes">
+    <Key>
+      <PropertyRef Name="Jokesid" />
+    </Key>
+    <Property Name="Jokesid" Type="bigint" Nullable="false" />
+    <Property Name="memsid" Type="bigint" Nullable="false" />
+    <Property Name="Jokesdate" Type="datetime" Nullable="false" />
+    <Property Name="Jokessub" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="JokesDesc" Type="varchar" MaxLength="8000" Nullable="false" />
+    <Property Name="Jokespic" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ipaddress" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="IsApproved" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="categoryId" Type="int" Nullable="false" />
+    <Property Name="TotalView" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_Complaints">
+    <Key>
+      <PropertyRef Name="ComplaintID" />
+    </Key>
+    <Property Name="ComplaintID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserMobile" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EmailID" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="ComplaintHead" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="ComplaintDesc" Type="varchar" MaxLength="5000" Nullable="false" />
+    <Property Name="ComplaintDate" Type="datetime" Nullable="false" />
+    <Property Name="IsResolved" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="ResolvedDate" Type="datetime" />
+    <Property Name="ResolvedBy" Type="bigint" Nullable="false" />
+    <Property Name="ResolvedByName" Type="varchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_Complaints_Comments">
+    <Key>
+      <PropertyRef Name="CommentsID" />
+    </Key>
+    <Property Name="CommentsID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ComplaintsID" Type="bigint" Nullable="false" />
+    <Property Name="Comments" Type="varchar" MaxLength="5000" Nullable="false" />
+    <Property Name="CommentsBy" Type="bigint" Nullable="false" />
+    <Property Name="CommentsByName" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="IsAdmin" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="CommentsDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ForumMainCategory_Mems1">
+    <End Role="Mems" Type="Self.Mems" Multiplicity="1" />
+    <End Role="ForumMainCategory" Type="Self.ForumMainCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mems">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="ForumMainCategory">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumSubCategory_ForumMainCategory">
+    <End Role="ForumMainCategory" Type="Self.ForumMainCategory" Multiplicity="1" />
+    <End Role="ForumSubCategory" Type="Self.ForumSubCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForumMainCategory">
+        <PropertyRef Name="catid" />
+      </Principal>
+      <Dependent Role="ForumSubCategory">
+        <PropertyRef Name="CatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumSubCategory_Mems">
+    <End Role="Mems" Type="Self.Mems" Multiplicity="1" />
+    <End Role="ForumSubCategory" Type="Self.ForumSubCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mems">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="ForumSubCategory">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumTopic_ForumMainCategory">
+    <End Role="ForumMainCategory" Type="Self.ForumMainCategory" Multiplicity="1" />
+    <End Role="ForumTopic" Type="Self.ForumTopic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForumMainCategory">
+        <PropertyRef Name="catid" />
+      </Principal>
+      <Dependent Role="ForumTopic">
+        <PropertyRef Name="catid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumTopic_ForumSubCategory">
+    <End Role="ForumSubCategory" Type="Self.ForumSubCategory" Multiplicity="1" />
+    <End Role="ForumTopic" Type="Self.ForumTopic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForumSubCategory">
+        <PropertyRef Name="SubCatId" />
+      </Principal>
+      <Dependent Role="ForumTopic">
+        <PropertyRef Name="SubCatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumTopic_Mems">
+    <End Role="Mems" Type="Self.Mems" Multiplicity="1" />
+    <End Role="ForumTopic" Type="Self.ForumTopic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mems">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="ForumTopic">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumTopicAnswer_ForumTopic">
+    <End Role="ForumTopic" Type="Self.ForumTopic" Multiplicity="1" />
+    <End Role="ForumTopicAnswer" Type="Self.ForumTopicAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForumTopic">
+        <PropertyRef Name="TopicId" />
+      </Principal>
+      <Dependent Role="ForumTopicAnswer">
+        <PropertyRef Name="TopicId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumTopicAnswer_Mems">
+    <End Role="Mems" Type="Self.Mems" Multiplicity="1" />
+    <End Role="ForumTopicAnswer" Type="Self.ForumTopicAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mems">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="ForumTopicAnswer">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_joblistn_citytable">
+    <End Role="citytable" Type="Self.citytable" Multiplicity="1" />
+    <End Role="joblistn" Type="Self.joblistn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="citytable">
+        <PropertyRef Name="cityid" />
+      </Principal>
+      <Dependent Role="joblistn">
+        <PropertyRef Name="cityid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_joblistn_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="joblistn" Type="Self.joblistn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="COUNTRYID" />
+      </Principal>
+      <Dependent Role="joblistn">
+        <PropertyRef Name="countryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_joblistn_jobcategory">
+    <End Role="jobcategory" Type="Self.jobcategory" Multiplicity="1" />
+    <End Role="joblistn" Type="Self.joblistn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="jobcategory">
+        <PropertyRef Name="jobcategoryid" />
+      </Principal>
+      <Dependent Role="joblistn">
+        <PropertyRef Name="jobcategoryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_joblistn_Mems">
+    <End Role="Mems" Type="Self.Mems" Multiplicity="1" />
+    <End Role="joblistn" Type="Self.joblistn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mems">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="joblistn">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_joblistn_states">
+    <End Role="states" Type="Self.states" Multiplicity="1" />
+    <End Role="joblistn" Type="Self.joblistn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="states">
+        <PropertyRef Name="stateid" />
+      </Principal>
+      <Dependent Role="joblistn">
+        <PropertyRef Name="stateid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mems_citytable">
+    <End Role="citytable" Type="Self.citytable" Multiplicity="1" />
+    <End Role="Mems" Type="Self.Mems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="citytable">
+        <PropertyRef Name="cityid" />
+      </Principal>
+      <Dependent Role="Mems">
+        <PropertyRef Name="cityid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mems_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Mems" Type="Self.Mems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="COUNTRYID" />
+      </Principal>
+      <Dependent Role="Mems">
+        <PropertyRef Name="countryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mems_jobcategory">
+    <End Role="jobcategory" Type="Self.jobcategory" Multiplicity="0..1" />
+    <End Role="Mems" Type="Self.Mems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="jobcategory">
+        <PropertyRef Name="jobcategoryid" />
+      </Principal>
+      <Dependent Role="Mems">
+        <PropertyRef Name="jobcategoryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mems_states">
+    <End Role="states" Type="Self.states" Multiplicity="1" />
+    <End Role="Mems" Type="Self.Mems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="states">
+        <PropertyRef Name="stateid" />
+      </Principal>
+      <Dependent Role="Mems">
+        <PropertyRef Name="stateid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Photos_Mems">
+    <End Role="Mems" Type="Self.Mems" Multiplicity="1" />
+    <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mems">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="Photos">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Jokes_Jokescatmaster">
+    <End Role="Jokescatmaster" Type="Self.Jokescatmaster" Multiplicity="1" />
+    <End Role="tbl_Jokes" Type="Self.tbl_Jokes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jokescatmaster">
+        <PropertyRef Name="catid" />
+      </Principal>
+      <Dependent Role="tbl_Jokes">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Jokes_Jokescatmaster1">
+    <End Role="Jokescatmaster" Type="Self.Jokescatmaster" Multiplicity="1" />
+    <End Role="tbl_Jokes" Type="Self.tbl_Jokes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jokescatmaster">
+        <PropertyRef Name="catid" />
+      </Principal>
+      <Dependent Role="tbl_Jokes">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Jokes_Mems">
+    <End Role="Mems" Type="Self.Mems" Multiplicity="1" />
+    <End Role="tbl_Jokes" Type="Self.tbl_Jokes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mems">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="tbl_Jokes">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Jokes_Mems1">
+    <End Role="Mems" Type="Self.Mems" Multiplicity="1" />
+    <End Role="tbl_Jokes" Type="Self.tbl_Jokes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mems">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="tbl_Jokes">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Jokes_Mems2">
+    <End Role="Mems" Type="Self.Mems" Multiplicity="1" />
+    <End Role="tbl_Jokes" Type="Self.tbl_Jokes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mems">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="tbl_Jokes">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Editmem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="memsid" Type="bigint" Mode="In" />
+    <Parameter Name="fname" Type="varchar" Mode="In" />
+    <Parameter Name="lname" Type="varchar" Mode="In" />
+    <Parameter Name="passw" Type="varchar" Mode="In" />
+    <Parameter Name="gender" Type="varchar" Mode="In" />
+    <Parameter Name="countryid" Type="smallint" Mode="In" />
+    <Parameter Name="stateid" Type="smallint" Mode="In" />
+    <Parameter Name="cityid" Type="smallint" Mode="In" />
+    <Parameter Name="aboutme" Type="varchar" Mode="In" />
+    <Parameter Name="isJobseeker" Type="varchar" Mode="In" />
+    <Parameter Name="jobcategoryid" Type="smallint" Mode="In" />
+    <Parameter Name="designation" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="ForumAddCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="forumcategoryn" Type="varchar" Mode="In" />
+    <Parameter Name="descrip" Type="varchar" Mode="In" />
+    <Parameter Name="Memsid" Type="bigint" Mode="In" />
+    <Parameter Name="RowEffect" Type="int" Mode="InOut" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="ForumAproveTopic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="topicId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="ForumAproveTopicAns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AnsId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="forumCheckSubCat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CAtId" Type="int" Mode="In" />
+    <Parameter Name="SubCAtTitle" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ForumdeleteAnswer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AnsId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="ForumDeleteCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="catid" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="forumdeleteTopic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TopicId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="forumgetAllCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ForumgetSubCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ForumgetTopicAnswer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="startRowIndex" Type="int" Mode="In" />
+    <Parameter Name="maximumRows" Type="int" Mode="In" />
+    <Parameter Name="criteria" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="ForumgetTopicDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TopicId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="ForumgetTopics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="criteria" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ForumgetUnApproveAnswer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="startRowIndex" Type="int" Mode="In" />
+    <Parameter Name="maximumRows" Type="int" Mode="In" />
+    <Parameter Name="criteria" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="ForumgetUnApproveTopics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="startRowIndex" Type="int" Mode="In" />
+    <Parameter Name="maximumRows" Type="int" Mode="In" />
+    <Parameter Name="criteria" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="forumInsertAnswer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TopicId" Type="bigint" Mode="In" />
+    <Parameter Name="TopicAns" Type="varchar" Mode="In" />
+    <Parameter Name="memsid" Type="bigint" Mode="In" />
+    <Parameter Name="AnsDate" Type="datetime" Mode="In" />
+    <Parameter Name="UpdateyByName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="forumInsertSubCat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CatId" Type="bigint" Mode="In" />
+    <Parameter Name="SubCatTitle" Type="varchar" Mode="In" />
+    <Parameter Name="SubCatDesc" Type="varchar" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="StartedBy" Type="bigint" Mode="In" />
+    <Parameter Name="memsid" Type="bigint" Mode="In" />
+    <Parameter Name="RowEffect" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="forumInsertTopic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TopicTitle" Type="varchar" Mode="In" />
+    <Parameter Name="TopicDesc" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CatId" Type="bigint" Mode="In" />
+    <Parameter Name="SubCatId" Type="bigint" Mode="In" />
+    <Parameter Name="memsid" Type="bigint" Mode="In" />
+    <Parameter Name="UpdateCandiName" Type="varchar" Mode="In" />
+    <Parameter Name="UpdateCandiId" Type="bigint" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="UpdateDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="ForumUnAproveTopic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TopicId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="ForumUnAproveTopicAns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AnsId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="insertNewCar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="memsid" Type="bigint" Mode="In" />
+    <Parameter Name="Makeid" Type="bigint" Mode="In" />
+    <Parameter Name="ModelID" Type="bigint" Mode="In" />
+    <Parameter Name="Version" Type="nvarchar" Mode="In" />
+    <Parameter Name="Price" Type="bigint" Mode="In" />
+    <Parameter Name="Pname" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Stateid" Type="smallint" Mode="In" />
+    <Parameter Name="cityid" Type="smallint" Mode="In" />
+    <Parameter Name="Mobile" Type="nvarchar" Mode="In" />
+    <Parameter Name="Ldate" Type="date" Mode="In" />
+    <Parameter Name="countryId" Type="smallint" Mode="In" />
+  </Function>
+  <Function Name="Job_Search" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="criteria" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="jobApprove" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="jobid" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="jobbySearchnpage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="startRowIndex" Type="int" Mode="In" />
+    <Parameter Name="maximumRows" Type="int" Mode="In" />
+    <Parameter Name="crteria" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Count" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="jobUnApprove" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="jobid" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="memberbySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="startRowIndex" Type="int" Mode="In" />
+    <Parameter Name="maximumRows" Type="int" Mode="In" />
+    <Parameter Name="crteria" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Count" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="ResumeMem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="memsid" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SuspendMem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="memsid" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="User_Complaints_Add" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserMobile" Type="varchar" Mode="In" />
+    <Parameter Name="EmailID" Type="varchar" Mode="In" />
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+    <Parameter Name="ComplaintHead" Type="varchar" Mode="In" />
+    <Parameter Name="ComplaintDesc" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="User_Complaints_Comments_Add" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ComplaintsID" Type="bigint" Mode="In" />
+    <Parameter Name="Comments" Type="varchar" Mode="In" />
+    <Parameter Name="CommentsBy" Type="bigint" Mode="In" />
+    <Parameter Name="CommentsByName" Type="varchar" Mode="In" />
+    <Parameter Name="IsAdmin" Type="varchar" Mode="In" />
+    <Parameter Name="CommentsDate" Type="datetime" Mode="In" />
+    <Parameter Name="Resolved" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="User_Complaints_VerifyUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mobile" Type="varchar" Mode="In" />
+    <Parameter Name="EmailID" Type="varchar" Mode="In" />
+    <Parameter Name="ComplaintsID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="UserComplaints_Comments_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CommentID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="UserComplaints_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ComplaintsID" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="viewprofilemem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="memsid" Type="bigint" Mode="In" />
+  </Function>
+  <EntityContainer Name="nextdhoomModelStoreContainer">
+    <EntitySet Name="citytable" EntityType="Self.citytable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ForumMainCategory" EntityType="Self.ForumMainCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ForumSubCategory" EntityType="Self.ForumSubCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ForumTopic" EntityType="Self.ForumTopic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ForumTopicAnswer" EntityType="Self.ForumTopicAnswer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="jobcategory" EntityType="Self.jobcategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="joblistn" EntityType="Self.joblistn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Jokescatmaster" EntityType="Self.Jokescatmaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="meminvites" EntityType="Self.meminvites" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mems" EntityType="Self.Mems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NewsCatmaster" EntityType="Self.NewsCatmaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Photos" EntityType="Self.Photos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="states" EntityType="Self.states" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Jokes" EntityType="Self.tbl_Jokes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Complaints" EntityType="Self.User_Complaints" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Complaints_Comments" EntityType="Self.User_Complaints_Comments" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ForumMainCategory_Mems1" Association="Self.FK_ForumMainCategory_Mems1">
+      <End Role="Mems" EntitySet="Mems" />
+      <End Role="ForumMainCategory" EntitySet="ForumMainCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumSubCategory_ForumMainCategory" Association="Self.FK_ForumSubCategory_ForumMainCategory">
+      <End Role="ForumMainCategory" EntitySet="ForumMainCategory" />
+      <End Role="ForumSubCategory" EntitySet="ForumSubCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumSubCategory_Mems" Association="Self.FK_ForumSubCategory_Mems">
+      <End Role="Mems" EntitySet="Mems" />
+      <End Role="ForumSubCategory" EntitySet="ForumSubCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumTopic_ForumMainCategory" Association="Self.FK_ForumTopic_ForumMainCategory">
+      <End Role="ForumMainCategory" EntitySet="ForumMainCategory" />
+      <End Role="ForumTopic" EntitySet="ForumTopic" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumTopic_ForumSubCategory" Association="Self.FK_ForumTopic_ForumSubCategory">
+      <End Role="ForumSubCategory" EntitySet="ForumSubCategory" />
+      <End Role="ForumTopic" EntitySet="ForumTopic" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumTopic_Mems" Association="Self.FK_ForumTopic_Mems">
+      <End Role="Mems" EntitySet="Mems" />
+      <End Role="ForumTopic" EntitySet="ForumTopic" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumTopicAnswer_ForumTopic" Association="Self.FK_ForumTopicAnswer_ForumTopic">
+      <End Role="ForumTopic" EntitySet="ForumTopic" />
+      <End Role="ForumTopicAnswer" EntitySet="ForumTopicAnswer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumTopicAnswer_Mems" Association="Self.FK_ForumTopicAnswer_Mems">
+      <End Role="Mems" EntitySet="Mems" />
+      <End Role="ForumTopicAnswer" EntitySet="ForumTopicAnswer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_joblistn_citytable" Association="Self.FK_joblistn_citytable">
+      <End Role="citytable" EntitySet="citytable" />
+      <End Role="joblistn" EntitySet="joblistn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_joblistn_Country" Association="Self.FK_joblistn_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="joblistn" EntitySet="joblistn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_joblistn_jobcategory" Association="Self.FK_joblistn_jobcategory">
+      <End Role="jobcategory" EntitySet="jobcategory" />
+      <End Role="joblistn" EntitySet="joblistn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_joblistn_Mems" Association="Self.FK_joblistn_Mems">
+      <End Role="Mems" EntitySet="Mems" />
+      <End Role="joblistn" EntitySet="joblistn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_joblistn_states" Association="Self.FK_joblistn_states">
+      <End Role="states" EntitySet="states" />
+      <End Role="joblistn" EntitySet="joblistn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mems_citytable" Association="Self.FK_Mems_citytable">
+      <End Role="citytable" EntitySet="citytable" />
+      <End Role="Mems" EntitySet="Mems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mems_Country" Association="Self.FK_Mems_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Mems" EntitySet="Mems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mems_jobcategory" Association="Self.FK_Mems_jobcategory">
+      <End Role="jobcategory" EntitySet="jobcategory" />
+      <End Role="Mems" EntitySet="Mems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mems_states" Association="Self.FK_Mems_states">
+      <End Role="states" EntitySet="states" />
+      <End Role="Mems" EntitySet="Mems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Photos_Mems" Association="Self.FK_Photos_Mems">
+      <End Role="Mems" EntitySet="Mems" />
+      <End Role="Photos" EntitySet="Photos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Jokes_Jokescatmaster" Association="Self.FK_tbl_Jokes_Jokescatmaster">
+      <End Role="Jokescatmaster" EntitySet="Jokescatmaster" />
+      <End Role="tbl_Jokes" EntitySet="tbl_Jokes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Jokes_Jokescatmaster1" Association="Self.FK_tbl_Jokes_Jokescatmaster1">
+      <End Role="Jokescatmaster" EntitySet="Jokescatmaster" />
+      <End Role="tbl_Jokes" EntitySet="tbl_Jokes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Jokes_Mems" Association="Self.FK_tbl_Jokes_Mems">
+      <End Role="Mems" EntitySet="Mems" />
+      <End Role="tbl_Jokes" EntitySet="tbl_Jokes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Jokes_Mems1" Association="Self.FK_tbl_Jokes_Mems1">
+      <End Role="Mems" EntitySet="Mems" />
+      <End Role="tbl_Jokes" EntitySet="tbl_Jokes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Jokes_Mems2" Association="Self.FK_tbl_Jokes_Mems2">
+      <End Role="Mems" EntitySet="Mems" />
+      <End Role="tbl_Jokes" EntitySet="tbl_Jokes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

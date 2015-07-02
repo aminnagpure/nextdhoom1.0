@@ -1,0 +1,34 @@
+﻿@model IEnumerable<WebApplication13.Models.membersview.MemListViewModel>
+
+@{
+    ViewBag.Title = "OurMems";
+ 
+}
+
+<h2>OurMems</h2>
+
+<p>
+  
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fname)
+        </th>
+      
+      
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fname)          
+            @Html.DisplayFor(modelItem => item.lname) <br /><br />
+            <img src="@item.gimg" />
+
+        </td>
+      
+    </tr>
+}
+
+</table>

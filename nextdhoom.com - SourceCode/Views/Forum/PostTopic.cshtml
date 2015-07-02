@@ -1,0 +1,116 @@
+﻿@model WebApplication13.Models.posttopicModel 
+
+@{
+   if(@Model.forumcategory != null )
+    {
+
+        ViewBag.Title = @Model.forumcategory.SubCatTitle;
+        var gimg = @Model.forumcategory.gimg;
+        }
+    else
+    {
+        ViewBag.Title = "Insert Topic";
+        var gimg = "";
+    }
+   
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        toastr.options = {
+            "closeButton": false,
+            "positionClass": "toast-bottom-left",
+            "onclick": null,
+            "showDuration": "0",
+            "hideDuration": "0",
+            "timeOut": "0",
+            "showMethod": "fadeIn"
+        };
+
+        @if (ViewBag.Success == true) {
+            @:toastr.success("@ViewBag.Message");
+        } else if (ViewBag.Success == false) {
+            @:toastr.error("@ViewBag.Message");
+        }
+    });
+</script>
+
+<h2>PostTopic</h2>
+<style>
+   textarea {
+        width: 500px;
+        height:300px;
+    }
+    input {
+        width: 500px;
+    }
+</style>
+
+@if (@Model.forumcategory != null )
+{ 
+<table class="table-responsive" width="100%">
+    <tr class="theader">
+        <td width="150" class="time" style="color:White;"></td>
+        <td align="right"></td>
+    </tr>
+    <tr>
+        <td valign="top" class="UserDetails" style="width: 150px;">
+
+            <a href="@Url.Action("viewprofile", "Members", new { id = @Model.forumcategory.memsid }, null)"><img src="@Model.forumcategory.gimg" /></a>
+            <div>
+                @Html.DisplayFor(model => model.forumcategory.fname)
+
+            </div>
+            <div>
+                total Threads:@Html.DisplayFor(model => model.forumcategory.TopicsCount)<br />
+                total replies: @Html.DisplayFor(model => model.forumcategory.ReplyCount)
+            </div>
+        </td>
+        <td>
+            <div>
+                <strong>@Html.DisplayFor(model => model.forumcategory.SubCatTitle)</strong>
+            </div>
+            <hr size="1" style="color:#CECECE; background-color:#CECECE">
+            <div>
+                @Html.DisplayFor(model => model.forumcategory.SubCatDesc)
+            </div>
+            
+        </td>
+    </tr>
+</table>
+}
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Insert Topic</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.insertTp.topicTitle, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.insertTp.topicTitle)
+                @Html.ValidationMessageFor(model => model.insertTp.topicTitle)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.insertTp.topicDesc, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.insertTp.topicDesc)
+                @Html.ValidationMessageFor(model => model.insertTp.topicDesc)
+            </div>
+        </div>
+                
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,51 @@
+﻿@model WebApplication13.Models.Mem
+
+@{
+    ViewBag.Title = "ViewProfile";
+
+}
+
+<h2>Profile of @Model.fname</h2>
+
+<div>
+
+    <hr />
+    <table>
+        <tr>
+            <td align="left">
+                <img src="@Model.gimg" />
+            </td>
+            <td>&nbsp;&nbsp;</td>
+            <td>
+                @Model.fname &nbsp;
+                @Model.lname <br />
+                Gender : @Model.gender
+            </td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td>&nbsp;&nbsp;</td>
+            <td>
+                @Model.Country.countryname
+                &nbsp; @Model.state.statename
+                &nbsp; @Model.citytable.cityname
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                @Model.aboutme
+            </td>
+        </tr>
+    </table>
+</div>
+<p>
+    @if (Model.susp == "Y")
+    {
+        @Html.ActionLink("Resume", "ResumeUser", new { id = @Model.memsid }, false);
+    }
+    else
+    {
+        @Html.ActionLink("Suspend", "suspendUser", new {id = @Model.memsid },false);
+    }
+    | @Html.ActionLink("Back to List", "Index")
+</p>

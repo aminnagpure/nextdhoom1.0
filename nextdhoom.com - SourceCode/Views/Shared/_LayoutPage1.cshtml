@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+ @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Nextdhoom.com", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Privacy Policy", "privacy", "Home")</li>
+                    <li>@Html.ActionLink("Support/Complaints", "support", "Home")</li>
+                    <li>@Html.ActionLink("Testing ", "testind", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+ <table align="left">
+     <tr>
+         <td valign="top">
+             <br />
+           
+             <div class="dropdown" style="margin-left:2px">
+                 <button type="button" class="btn dropdown-toggle" id="dropdownMenu1"
+                         data-toggle="dropdown">
+                     Topics
+                     <span class="caret"></span>
+                 </button>
+                 <ul class="dropdown-menu pull-left" role="menu"
+                     aria-labelledby="dropdownMenu1" style="margin-left:100px">
+                     <li role=" presentation">
+                     <a role="menuitem" tabindex="-1" href="#">Java</a>
+                     </li>
+                     <li role="presentation">
+                         <a role="menuitem" tabindex="-1" href="#">Data Mining</a>
+                     </li>
+                     <li role="presentation">
+                         <a role="menuitem" tabindex="-1" href="#">
+                             Data Communication/Networking
+                         </a>
+                     </li>
+                     <li role="presentation" class="divider"></li>
+                     <li role="presentation">
+                         <a role="menuitem" tabindex="-1" href="#">Separated link</a>
+                     </li>
+                 </ul>
+             </div>
+             <br />
+             <div class="dropdown" style="margin-left:2px">
+                 <button type="button" class="btn dropdown-toggle" id="dropdownMenu1"
+                         data-toggle="dropdown">
+                     Chat
+                     <span class="caret"></span>
+                 </button>
+                 <ul class="dropdown-menu pull-left" role="menu"
+                     aria-labelledby="dropdownMenu1" style="margin-left:100px">
+                     <li role=" presentation">
+                         <a role="menuitem" tabindex="-1" href="#">Java</a>
+                     </li>
+                     <li role="presentation">
+                         <a role="menuitem" tabindex="-1" href="#">Data Mining</a>
+                     </li>
+                     <li role="presentation">
+                         <a role="menuitem" tabindex="-1" href="#">
+                             Data Communication/Networking
+                         </a>
+                     </li>
+                     <li role="presentation" class="divider"></li>
+                     <li role="presentation">
+                         <a role="menuitem" tabindex="-1" href="#">Separated link</a>
+                     </li>
+                 </ul>
+             </div>
+          
+             
+         </td>
+         <td align="right" valign="top" width="40%">
+             <br /><br />
+         @RenderBody()</td>
+     </tr>
+ </table>
+        
+
+
+
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+</body>
+</html>

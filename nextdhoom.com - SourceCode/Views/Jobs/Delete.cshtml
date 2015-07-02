@@ -1,0 +1,145 @@
+﻿@model WebApplication13.Models.joblistn
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Members.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>joblistn</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.sysentrydate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sysentrydate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.designation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.designation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jobdescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jobdescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.minexp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.minexp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.maxexp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maxexp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.website)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.website)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.citytable.cityname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.citytable.cityname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jobcategory.category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jobcategory.category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mem.fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mem.fname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.state.statename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state.statename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.countryname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.countryname)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

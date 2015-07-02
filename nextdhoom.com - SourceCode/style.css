@@ -1,0 +1,66 @@
+h2 {
+  font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+body {
+  font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+  font-size: 16px;
+}
+
+input {
+  height: 38px;
+  width: 180px;
+  border: medium solid #F00;
+}
+
+#my-id {
+  font-size: 22px;
+  font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+  font-weight: bold;
+}
+
+#my-video {
+  margin-top: 15px;
+  width: 180px;
+  height: auto;
+  background-color: #eee;
+}
+
+#their-video {
+  width: 320px;
+  height: 240;
+  background-color: #eee;
+}
+
+#video-container {
+  padding: 25px;
+  text-align: center;
+}
+
+#step1-error, #step2, #step3 {
+  display: none;
+}
+#my-id {
+  font-weight: bold;
+  color: #F00;
+
+}
+
+#callto-id {
+  height: 38px;"
+}
+
+#subhead { 
+  font-size: 24px;
+  color: #F00;
+  font-weight: bold;
+}
+
+#make-call, #end-call {
+  font-size: 18px;
+  font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+  font-weight: bold;
+  color: #F00;
+}

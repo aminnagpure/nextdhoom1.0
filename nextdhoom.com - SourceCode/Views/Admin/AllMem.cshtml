@@ -1,0 +1,127 @@
+﻿@model WebApplication13.Models.membsrebySearching
+
+@{
+    ViewBag.Title = "AllMem";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int totalcount = Convert.ToInt32(Model.TotalCount);
+    WebGrid grid = new WebGrid(rowsPerPage: Model.pagesize, ajaxUpdateContainerId: "grid2");
+    grid.Bind(Model.data,
+              autoSortAndPage: false,
+              rowCount: totalcount
+
+    );
+
+}
+
+<style>
+    .table tfoot td a {
+        padding: 2px 8px;
+        background-color: #EBEBEB;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        color: #888888;
+        font-size: smaller;
+    }
+
+    .table#gridpager thead th a {
+        padding: 2px 8px;
+        background-color: #EBEBEB;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        color: #888888;
+        font-size: smaller;
+    }
+</style>
+<div class="page-header">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Jobs
+        </div>
+        <div class="panel-body">
+
+            @using (Html.BeginForm("AllMem", "ContentManage", FormMethod.Get))
+            {
+                @Html.Editor("searchText", new { @class = "form-controller", @placeholder = "Search" })
+
+                <input type="radio" name="byday" id="All" value="All" checked>@Html.Label("All")
+                <input type="radio" name="byday" id="Today" value="Today">@Html.Label("Today")
+                <input type="radio" name="byday" id="Yesterday" value="Yesterday">@Html.Label("Yesterday")
+                <input type="radio" name="byday" id="LastWeek" value="LastWeek">@Html.Label("Last Week")
+
+                <button class="btn btn-sm" type="submit">
+                    <i class="glyphicon glyphicon-search"></i> Search
+                </button>
+
+            }
+
+
+
+
+        </div>
+
+        <p class="small"> <b>@Html.Label("Total records: ")</b> @Html.Label(grid.TotalRowCount.ToString())</p>
+        <table class="table table-striped" id="gridpager">
+            <thead>
+                <tr>
+                    <th>  @grid.Pager()</th>
+                </tr>
+            </thead>
+        </table>
+        @grid.GetHtml(htmlAttributes: new { id = "grid2" },
+    fillEmptyRows: false,
+                 tableStyle: "table table-striped ",
+
+        mode: WebGridPagerModes.All,
+columns: new[] {
+      grid.Column("Name",
+
+                 format:
+                @<text><div>
+                           <a href="@Url.Action("viewprofile", "ContentManage", new { id = @item.memsid }, null)" >
+                               <img src="@item.gimg" class="img-thumbnail thumbnail" />
+                               </a> 
+</div>
+
+                </text>
+                ),
+    //grid.Column("fname","Name"),
+    //grid.Column("Category"),
+    //grid.Column("designation"),
+    //grid.Column("jobdescription"),
+    //item.YourField.ToString().Length <= n ? item.YourField.ToString() : item.YourField.ToString().SubString(0,n) + "..."
+    grid.Column("about", "About", format:@<text>
+        <h4>@item.fname<small>(@item.gender)</small></h4>
+        <p>@(item.aboutme.ToString().Length <= 500 ? item.aboutme : item.aboutme.ToString().Substring(0, 500))</p>
+        <p class="text-right"><small>@item.regdate</small> || <small>Location : @item.countryname - @item.statename - @item.cityname</small></p>
+    </text>),
+        grid.Column ("Setting",
+        format : @<text>
+            
+            @Html.ActionLink("Suspend", "suspendUser", new { id = @item.memsid }, false)
+        @*<br /><br /><br />
+            @Html.ActionLink("Delete", "deleteUSer", new { id = @item.memsid }, false)*@
+               
+        </text>
+        ),
+        @*grid.Column("minexp","Experience",
+            format:@<text> </text>
+            ),*@
+    //grid.Column("maxexp"),
+    //grid.Column("sysentrydate"),
+    // grid.Column("countryname"),
+    //grid.Column("statename"),
+    //grid.Column("cityname"),
+
+
+
+})
+
+
+        <div class="panel-footer">
+
+        </div>
+    </div>
+
+</div>

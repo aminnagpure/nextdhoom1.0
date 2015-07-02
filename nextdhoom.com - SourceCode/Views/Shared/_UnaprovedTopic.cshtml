@@ -1,0 +1,156 @@
+﻿@model WebApplication13.Models.PagedData<WebApplication13.Models.ViewTopicModel>
+@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - NextDhoom.com</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Nextdhoom.com", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Index", "SendMailer")</li>
+                    <li>@Html.ActionLink("Privacy", "privacy", "Home")</li>
+                    <li>@Html.ActionLink("UnSubscribe", "Stopemails", "Home")</li>
+                    <li>@Html.ActionLink("Support", "Complaints", "Home")</li>
+                    <li>@Html.ActionLink("Forum", "Index", "Forum")</li>
+                </ul>
+                @if (Request.IsAuthenticated)
+                {
+                    @*using (Html.BeginForm("LogOff", "members", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()*@
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Members", routeValues: null, htmlAttributes: new { title = "Manage" })
+                        </li>
+                        <li>@Html.ActionLink("Log Off", "LogOff", "Members", routeValues: null, htmlAttributes: new { title = "Log Off" })</li>
+                    </ul>
+                    //}
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Register", "Register", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("Log in", "Login", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+        <div style="margin-top: 50px;">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td colspan="5">
+                            <div class="row">
+                                <div class="col-sm-3 col-md-3 pull-left">
+                                    @using (Html.BeginForm("searchTp", "ContentManage"))
+                                    {
+                                        <div class="input-group input-group-sm">
+                                            <input type="search" class="form-control" placeholder="Search" name="searchtext">
+                                            @*Html.Editor("searchtext", new { @class = "form-control" })*@
+
+                                            <div class="input-group-btn">
+
+
+                                                <button class="btn btn-default btn-lg" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Description
+                    </th>
+
+                    <th>
+                        date
+                    </th>
+
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Data)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fname)<br />
+                            <a href="@Url.Action("viewprofile", "ContentManage", new { id = @item.memsid }, null)"> <img src="@item.Photo" /></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TopicTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TopicDesc)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("UnApprove", "UnAproveTopic", "ContentManage", new { id = item.TopicId }, null)
+                        </td>
+                    </tr>
+                }
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <ul class="pagination pagination-sm">
+                                @for (int i = 1; i <= Model.NumberOfPages; i++)
+                                {
+                                    <li>   <a class="page-number" href="javascript:void();">@i</a></li>
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - amincode.com</p>
+        </footer>
+
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+</body>
+</html>

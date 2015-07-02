@@ -1,0 +1,144 @@
+﻿@*@model WebApplication13.Models.ViewSearchJob  
+@{
+    Layout = "~/Views/Shared/_Members.cshtml";
+}
+
+
+@using (Html.BeginForm("SearchJobs", "Jobs"))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true)
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.searchJobs.jobcategoryid, "jobcategoryid", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("jobcategoryid", (SelectList)ViewBag.jobcategoryid, "Select a Category")
+                @Html.ValidationMessageFor(model => model.searchJobs.jobcategoryid)
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.searchJobs.designation, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.searchJobs.designation)
+                @Html.ValidationMessageFor(model => model.searchJobs.designation)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.searchJobs.minexp, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.searchJobs.minexp)
+                @Html.ValidationMessageFor(model => model.searchJobs.minexp)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.searchJobs.maxexp, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.searchJobs.maxexp)
+                @Html.ValidationMessageFor(model => model.searchJobs.maxexp)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.searchJobs.salary, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.searchJobs.salary)
+                @Html.ValidationMessageFor(model => model.searchJobs.salary)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Location", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("countryid", "Select a Country")
+                @Html.ValidationMessageFor(model => model.countryid)<br /><br />
+
+
+
+                @Html.DropDownList("stateid")<br /><br />
+
+                @Html.ValidationMessageFor(model => model.stateid)
+
+                @Html.DropDownList("cityid")<br /><br />
+
+                @Html.ValidationMessageFor(model => model.cityid)
+            </div>
+        </div>
+
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<script type="text/jscript">
+    $(function () {
+
+        $('#countryid').ready(function () {
+
+
+            $('#stateid').empty();
+            $('#cityid').empty();
+
+            $.getJSON('/Kas/StateList/' + $('#countryid').val(), function (data) {
+                var items = "<option value='0'>Select State</option>";
+                $.each(data, function (i, stateid) {
+                    items += "<option value='" + stateid.Value + "'>" + stateid.Text + "</option>";
+                });
+
+                $('#stateid').html(items);
+                $('#stateid').trigger("change");
+
+            });
+        });
+
+
+
+        $('#countryid').change(function () {
+
+            $.getJSON('/Kas/StateList/' + $('#countryid').val(), function (data) {
+                var items = '<option>Select a State</option>';
+                $.each(data, function (i, stateid) {
+                    items += "<option value='" + stateid.Value + "'>" + stateid.Text + "</option>";
+                });
+                $('#stateid').html(items);
+
+            });
+        });
+
+        $('#stateid').change(function () {
+            $.getJSON('/Kas/Citylist/' + $('#stateid').val(), function (data) {
+                var items = '<option>Select a City</option>';
+                $.each(data, function (i, cityid) {
+                    items += "<option value='" + cityid.Value + "'>" + cityid.Text + "</option>";
+                });
+                $('#cityid').html(items);
+
+
+
+            });
+        });
+
+
+
+
+
+    });
+
+</script>*@

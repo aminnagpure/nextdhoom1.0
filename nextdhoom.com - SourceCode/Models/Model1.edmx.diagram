@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="617e0d7e8df241b89a30330716e60d5c" Name="Diagram1" ZoomLevel="92">
+        <EntityTypeShape EntityType="nextdhoomModel.citytable" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="nextdhoomModel.Country" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="nextdhoomModel.meminvite" Width="1.5" PointX="2.875" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="nextdhoomModel.Mem" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="nextdhoomModel.Photo" Width="1.5" PointX="4.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="nextdhoomModel.state" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nextdhoomModel.sysdiagram" Width="1.5" PointX="2.75" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="nextdhoomModel.FK_Mems_citytable" ManuallyRouted="false" />
+        <AssociationConnector Association="nextdhoomModel.FK_Mems_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="nextdhoomModel.FK_Mems_states" ManuallyRouted="false" />
+        <AssociationConnector Association="nextdhoomModel.FK_Photos_Mems" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="nextdhoomModel.jobcategory" Width="1.5" PointX="4.875" PointY="0.5" />
+        <EntityTypeShape EntityType="nextdhoomModel.joblistn" Width="1.5" PointX="6.625" PointY="0.5" />
+        <AssociationConnector Association="nextdhoomModel.FK_joblistn_citytable" />
+        <AssociationConnector Association="nextdhoomModel.FK_joblistn_Country" />
+        <AssociationConnector Association="nextdhoomModel.FK_joblistn_jobcategory" />
+        <AssociationConnector Association="nextdhoomModel.FK_joblistn_Mems" />
+        <AssociationConnector Association="nextdhoomModel.FK_joblistn_states" />
+        <EntityTypeShape EntityType="nextdhoomModel.ForumMainCategory" Width="1.5" PointX="6.375" PointY="7.25" />
+        <EntityTypeShape EntityType="nextdhoomModel.ForumSubCategory" Width="1.5" PointX="9.75" PointY="6.75" />
+        <EntityTypeShape EntityType="nextdhoomModel.ForumTopic" Width="1.5" PointX="8" PointY="6" />
+        <EntityTypeShape EntityType="nextdhoomModel.ForumTopicAnswer" Width="1.5" PointX="8.25" PointY="3.25" />
+        <AssociationConnector Association="nextdhoomModel.FK_ForumMainCategory_Mems1" />
+        <AssociationConnector Association="nextdhoomModel.FK_ForumSubCategory_ForumMainCategory" />
+        <AssociationConnector Association="nextdhoomModel.FK_ForumTopic_ForumMainCategory" />
+        <AssociationConnector Association="nextdhoomModel.FK_ForumSubCategory_Mems" />
+        <AssociationConnector Association="nextdhoomModel.FK_ForumTopic_ForumSubCategory" />
+        <AssociationConnector Association="nextdhoomModel.FK_ForumTopic_Mems" />
+        <AssociationConnector Association="nextdhoomModel.FK_ForumTopicAnswer_ForumTopic" />
+        <AssociationConnector Association="nextdhoomModel.FK_ForumTopicAnswer_Mems" />
+        <EntityTypeShape EntityType="nextdhoomModel.NewsCatmaster" Width="1.5" PointX="2.5" PointY="10.375" />
+        <EntityTypeShape EntityType="nextdhoomModel.Jokescatmaster" Width="1.5" PointX="4.625" PointY="7.625" />
+        <EntityTypeShape EntityType="nextdhoomModel.tbl_Jokes" Width="1.5" PointX="0.75" PointY="7" />
+        <AssociationConnector Association="nextdhoomModel.FK_tbl_Jokes_Jokescatmaster" />
+        <AssociationConnector Association="nextdhoomModel.FK_tbl_Jokes_Jokescatmaster1" />
+        <AssociationConnector Association="nextdhoomModel.FK_tbl_Jokes_Mems" />
+        <AssociationConnector Association="nextdhoomModel.FK_tbl_Jokes_Mems1" />
+        <AssociationConnector Association="nextdhoomModel.FK_tbl_Jokes_Mems2" />
+        <EntityTypeShape EntityType="nextdhoomModel.User_Complaints" Width="1.5" PointX="2.625" PointY="9" />
+        <EntityTypeShape EntityType="nextdhoomModel.User_Complaints_Comments" Width="1.5" PointX="2.75" PointY="11" />
+        <AssociationConnector Association="nextdhoomModel.FK_Mems_jobcategory" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

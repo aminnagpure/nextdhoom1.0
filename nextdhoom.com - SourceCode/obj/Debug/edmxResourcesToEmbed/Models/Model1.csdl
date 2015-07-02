@@ -1,0 +1,964 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="nextdhoomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="citytable">
+    <Key>
+      <PropertyRef Name="cityid" />
+    </Key>
+    <Property Name="cityname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cityid" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="stateid" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Mems" Relationship="Self.FK_Mems_citytable" FromRole="citytable" ToRole="Mems" />
+    <NavigationProperty Name="joblistns" Relationship="nextdhoomModel.FK_joblistn_citytable" FromRole="citytable" ToRole="joblistn" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="COUNTRYID" />
+    </Key>
+    <Property Name="COUNTRYID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="countryname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Mems" Relationship="Self.FK_Mems_Country" FromRole="Country" ToRole="Mems" />
+    <NavigationProperty Name="joblistns" Relationship="nextdhoomModel.FK_joblistn_Country" FromRole="Country" ToRole="joblistn" />
+  </EntityType>
+  <EntityType Name="meminvite">
+    <Key>
+      <PropertyRef Name="inviteid" />
+    </Key>
+    <Property Name="inviteid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="memsid" Type="Int64" Nullable="false" />
+    <Property Name="useremail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mem">
+    <Key>
+      <PropertyRef Name="memsid" />
+    </Key>
+    <Property Name="memsid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="passw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="photoid" Type="Int64" Nullable="false" />
+    <Property Name="countryid" Type="Int16" Nullable="false" />
+    <Property Name="stateid" Type="Int16" Nullable="false" />
+    <Property Name="cityid" Type="Int16" Nullable="false" />
+    <Property Name="gurl" Type="String" MaxLength="550" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gimg" Type="String" MaxLength="650" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="aboutme" Type="String" MaxLength="450" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="citytable" Relationship="Self.FK_Mems_citytable" FromRole="Mems" ToRole="citytable" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Mems_Country" FromRole="Mems" ToRole="Country" />
+    <NavigationProperty Name="state" Relationship="Self.FK_Mems_states" FromRole="Mems" ToRole="states" />
+    <NavigationProperty Name="Photos" Relationship="Self.FK_Photos_Mems" FromRole="Mems" ToRole="Photos" />
+    <NavigationProperty Name="joblistns" Relationship="nextdhoomModel.FK_joblistn_Mems" FromRole="Mem" ToRole="joblistn" />
+    <NavigationProperty Name="ForumMainCategories" Relationship="nextdhoomModel.FK_ForumMainCategory_Mems1" FromRole="Mem" ToRole="ForumMainCategory" />
+    <NavigationProperty Name="ForumSubCategories" Relationship="nextdhoomModel.FK_ForumSubCategory_Mems" FromRole="Mem" ToRole="ForumSubCategory" />
+    <NavigationProperty Name="ForumTopics" Relationship="nextdhoomModel.FK_ForumTopic_Mems" FromRole="Mem" ToRole="ForumTopic" />
+    <NavigationProperty Name="ForumTopicAnswers" Relationship="nextdhoomModel.FK_ForumTopicAnswer_Mems" FromRole="Mem" ToRole="ForumTopicAnswer" />
+    <NavigationProperty Name="tbl_Jokes" Relationship="nextdhoomModel.FK_tbl_Jokes_Mems" FromRole="Mem" ToRole="tbl_Jokes" />
+    <NavigationProperty Name="tbl_Jokes1" Relationship="nextdhoomModel.FK_tbl_Jokes_Mems1" FromRole="Mem" ToRole="tbl_Jokes" />
+    <NavigationProperty Name="tbl_Jokes2" Relationship="nextdhoomModel.FK_tbl_Jokes_Mems2" FromRole="Mem" ToRole="tbl_Jokes" />
+    <Property Name="susp" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="regDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="isJobseeker" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="designation" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="jobcategoryid" Type="Int16" />
+    <Property Name="sponsoremail" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="jobcategory" Relationship="nextdhoomModel.FK_Mems_jobcategory" FromRole="Mem" ToRole="jobcategory" />
+  </EntityType>
+  <EntityType Name="Photo">
+    <Key>
+      <PropertyRef Name="photoid" />
+    </Key>
+    <Property Name="photoname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="passw" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="uploaddate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="mainphoto" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isapproved" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="memsid" Type="Int64" Nullable="false" />
+    <Property Name="photoid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Mem" Relationship="Self.FK_Photos_Mems" FromRole="Photos" ToRole="Mems" />
+  </EntityType>
+  <EntityType Name="state">
+    <Key>
+      <PropertyRef Name="stateid" />
+    </Key>
+    <Property Name="countryid" Type="Int16" Nullable="false" />
+    <Property Name="statename" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="stateid" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Mems" Relationship="Self.FK_Mems_states" FromRole="states" ToRole="Mems" />
+    <NavigationProperty Name="joblistns" Relationship="nextdhoomModel.FK_joblistn_states" FromRole="state" ToRole="joblistn" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Mems_citytable">
+    <End Role="citytable" Type="Self.citytable" Multiplicity="1" />
+    <End Role="Mems" Type="Self.Mem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="citytable">
+        <PropertyRef Name="cityid" />
+      </Principal>
+      <Dependent Role="Mems">
+        <PropertyRef Name="cityid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mems_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Mems" Type="Self.Mem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="COUNTRYID" />
+      </Principal>
+      <Dependent Role="Mems">
+        <PropertyRef Name="countryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mems_states">
+    <End Role="states" Type="Self.state" Multiplicity="1" />
+    <End Role="Mems" Type="Self.Mem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="states">
+        <PropertyRef Name="stateid" />
+      </Principal>
+      <Dependent Role="Mems">
+        <PropertyRef Name="stateid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Photos_Mems">
+    <End Role="Mems" Type="Self.Mem" Multiplicity="1" />
+    <End Role="Photos" Type="Self.Photo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mems">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="Photos">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="nextdhoomEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="citytables" EntityType="Self.citytable" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="meminvites" EntityType="Self.meminvite" />
+    <EntitySet Name="Mems" EntityType="Self.Mem" />
+    <EntitySet Name="Photos" EntityType="Self.Photo" />
+    <EntitySet Name="states" EntityType="Self.state" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Mems_citytable" Association="Self.FK_Mems_citytable">
+      <End Role="citytable" EntitySet="citytables" />
+      <End Role="Mems" EntitySet="Mems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mems_Country" Association="Self.FK_Mems_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Mems" EntitySet="Mems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mems_states" Association="Self.FK_Mems_states">
+      <End Role="states" EntitySet="states" />
+      <End Role="Mems" EntitySet="Mems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Photos_Mems" Association="Self.FK_Photos_Mems">
+      <End Role="Mems" EntitySet="Mems" />
+      <End Role="Photos" EntitySet="Photos" />
+    </AssociationSet>
+    <FunctionImport Name="Editmem">
+      <Parameter Name="memsid" Mode="In" Type="Int64" />
+      <Parameter Name="fname" Mode="In" Type="String" />
+      <Parameter Name="lname" Mode="In" Type="String" />
+      <Parameter Name="passw" Mode="In" Type="String" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="countryid" Mode="In" Type="Int16" />
+      <Parameter Name="stateid" Mode="In" Type="Int16" />
+      <Parameter Name="cityid" Mode="In" Type="Int16" />
+      <Parameter Name="aboutme" Mode="In" Type="String" />
+      <Parameter Name="isJobseeker" Mode="In" Type="String" />
+      <Parameter Name="jobcategoryid" Mode="In" Type="Int16" />
+      <Parameter Name="designation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(nextdhoomModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(nextdhoomModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="viewprofilemem" ReturnType="Collection(nextdhoomModel.viewprofilemem_Result)">
+      <Parameter Name="memsid" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="jobcategories" EntityType="nextdhoomModel.jobcategory" />
+    <FunctionImport Name="jobmemlist" ReturnType="Collection(nextdhoomModel.jobmemlist_Result)">
+      <Parameter Name="memsid" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="joblistns" EntityType="nextdhoomModel.joblistn" />
+    <AssociationSet Name="FK_joblistn_citytable" Association="nextdhoomModel.FK_joblistn_citytable">
+      <End Role="citytable" EntitySet="citytables" />
+      <End Role="joblistn" EntitySet="joblistns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_joblistn_Country" Association="nextdhoomModel.FK_joblistn_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="joblistn" EntitySet="joblistns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_joblistn_jobcategory" Association="nextdhoomModel.FK_joblistn_jobcategory">
+      <End Role="jobcategory" EntitySet="jobcategories" />
+      <End Role="joblistn" EntitySet="joblistns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_joblistn_Mems" Association="nextdhoomModel.FK_joblistn_Mems">
+      <End Role="Mem" EntitySet="Mems" />
+      <End Role="joblistn" EntitySet="joblistns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_joblistn_states" Association="nextdhoomModel.FK_joblistn_states">
+      <End Role="state" EntitySet="states" />
+      <End Role="joblistn" EntitySet="joblistns" />
+    </AssociationSet>
+    <FunctionImport Name="User_Complaints_Add" ReturnType="Collection(Decimal)">
+      <Parameter Name="UserMobile" Mode="In" Type="String" />
+      <Parameter Name="EmailID" Mode="In" Type="String" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="ComplaintHead" Mode="In" Type="String" />
+      <Parameter Name="ComplaintDesc" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="ForumMainCategories" EntityType="nextdhoomModel.ForumMainCategory" />
+    <EntitySet Name="ForumSubCategories" EntityType="nextdhoomModel.ForumSubCategory" />
+    <EntitySet Name="ForumTopics" EntityType="nextdhoomModel.ForumTopic" />
+    <EntitySet Name="ForumTopicAnswers" EntityType="nextdhoomModel.ForumTopicAnswer" />
+    <AssociationSet Name="FK_ForumMainCategory_Mems1" Association="nextdhoomModel.FK_ForumMainCategory_Mems1">
+      <End Role="Mem" EntitySet="Mems" />
+      <End Role="ForumMainCategory" EntitySet="ForumMainCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumSubCategory_ForumMainCategory" Association="nextdhoomModel.FK_ForumSubCategory_ForumMainCategory">
+      <End Role="ForumMainCategory" EntitySet="ForumMainCategories" />
+      <End Role="ForumSubCategory" EntitySet="ForumSubCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumTopic_ForumMainCategory" Association="nextdhoomModel.FK_ForumTopic_ForumMainCategory">
+      <End Role="ForumMainCategory" EntitySet="ForumMainCategories" />
+      <End Role="ForumTopic" EntitySet="ForumTopics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumSubCategory_Mems" Association="nextdhoomModel.FK_ForumSubCategory_Mems">
+      <End Role="Mem" EntitySet="Mems" />
+      <End Role="ForumSubCategory" EntitySet="ForumSubCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumTopic_ForumSubCategory" Association="nextdhoomModel.FK_ForumTopic_ForumSubCategory">
+      <End Role="ForumSubCategory" EntitySet="ForumSubCategories" />
+      <End Role="ForumTopic" EntitySet="ForumTopics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumTopic_Mems" Association="nextdhoomModel.FK_ForumTopic_Mems">
+      <End Role="Mem" EntitySet="Mems" />
+      <End Role="ForumTopic" EntitySet="ForumTopics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumTopicAnswer_ForumTopic" Association="nextdhoomModel.FK_ForumTopicAnswer_ForumTopic">
+      <End Role="ForumTopic" EntitySet="ForumTopics" />
+      <End Role="ForumTopicAnswer" EntitySet="ForumTopicAnswers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumTopicAnswer_Mems" Association="nextdhoomModel.FK_ForumTopicAnswer_Mems">
+      <End Role="Mem" EntitySet="Mems" />
+      <End Role="ForumTopicAnswer" EntitySet="ForumTopicAnswers" />
+    </AssociationSet>
+    <FunctionImport Name="ForumAddCategory">
+      <Parameter Name="forumcategoryn" Mode="In" Type="String" />
+      <Parameter Name="descrip" Mode="In" Type="String" />
+      <Parameter Name="Memsid" Mode="In" Type="Int64" />
+      <Parameter Name="RowEffect" Mode="InOut" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="forumCheckSubCat" ReturnType="Collection(Int32)">
+      <Parameter Name="CAtId" Mode="In" Type="Int32" />
+      <Parameter Name="SubCAtTitle" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ForumdeleteAnswer">
+      <Parameter Name="AnsId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ForumDeleteCategory">
+      <Parameter Name="catid" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="forumdeleteTopic">
+      <Parameter Name="TopicId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="forumgetAllCategory" ReturnType="Collection(nextdhoomModel.forumgetAllCategory_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ForumgetSubCategory">
+      <Parameter Name="mid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ForumgetTopicAnswer">
+      <Parameter Name="startRowIndex" Mode="In" Type="Int32" />
+      <Parameter Name="maximumRows" Mode="In" Type="Int32" />
+      <Parameter Name="criteria" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ForumgetTopicDetails">
+      <Parameter Name="TopicId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ForumgetTopics" ReturnType="Collection(nextdhoomModel.ForumgetTopics_Result)">
+      <Parameter Name="criteria" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ForumgetUnApproveAnswer">
+      <Parameter Name="startRowIndex" Mode="In" Type="Int32" />
+      <Parameter Name="maximumRows" Mode="In" Type="Int32" />
+      <Parameter Name="criteria" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ForumgetUnApproveTopics">
+      <Parameter Name="startRowIndex" Mode="In" Type="Int32" />
+      <Parameter Name="maximumRows" Mode="In" Type="Int32" />
+      <Parameter Name="criteria" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="forumInsertAnswer">
+      <Parameter Name="TopicId" Mode="In" Type="Int64" />
+      <Parameter Name="TopicAns" Mode="In" Type="String" />
+      <Parameter Name="memsid" Mode="In" Type="Int64" />
+      <Parameter Name="AnsDate" Mode="In" Type="DateTime" />
+      <Parameter Name="UpdateyByName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="forumInsertTopic">
+      <Parameter Name="TopicTitle" Mode="In" Type="String" />
+      <Parameter Name="TopicDesc" Mode="In" Type="String" />
+      <Parameter Name="CatId" Mode="In" Type="Int64" />
+      <Parameter Name="SubCatId" Mode="In" Type="Int64" />
+      <Parameter Name="memsid" Mode="In" Type="Int64" />
+      <Parameter Name="UpdateCandiName" Mode="In" Type="String" />
+      <Parameter Name="UpdateCandiId" Mode="In" Type="Int64" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="UpdateDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="NewsCatmasters" EntityType="nextdhoomModel.NewsCatmaster" />
+    <EntitySet Name="Jokescatmasters" EntityType="nextdhoomModel.Jokescatmaster" />
+    <EntitySet Name="tbl_Jokes" EntityType="nextdhoomModel.tbl_Jokes" />
+    <AssociationSet Name="FK_tbl_Jokes_Jokescatmaster" Association="nextdhoomModel.FK_tbl_Jokes_Jokescatmaster">
+      <End Role="Jokescatmaster" EntitySet="Jokescatmasters" />
+      <End Role="tbl_Jokes" EntitySet="tbl_Jokes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Jokes_Jokescatmaster1" Association="nextdhoomModel.FK_tbl_Jokes_Jokescatmaster1">
+      <End Role="Jokescatmaster" EntitySet="Jokescatmasters" />
+      <End Role="tbl_Jokes" EntitySet="tbl_Jokes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Jokes_Mems" Association="nextdhoomModel.FK_tbl_Jokes_Mems">
+      <End Role="Mem" EntitySet="Mems" />
+      <End Role="tbl_Jokes" EntitySet="tbl_Jokes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Jokes_Mems1" Association="nextdhoomModel.FK_tbl_Jokes_Mems1">
+      <End Role="Mem" EntitySet="Mems" />
+      <End Role="tbl_Jokes" EntitySet="tbl_Jokes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Jokes_Mems2" Association="nextdhoomModel.FK_tbl_Jokes_Mems2">
+      <End Role="Mem" EntitySet="Mems" />
+      <End Role="tbl_Jokes" EntitySet="tbl_Jokes" />
+    </AssociationSet>
+    <FunctionImport Name="forumInsertSubCat">
+      <Parameter Name="CatId" Mode="In" Type="Int64" />
+      <Parameter Name="SubCatTitle" Mode="In" Type="String" />
+      <Parameter Name="SubCatDesc" Mode="In" Type="String" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="StartedBy" Mode="In" Type="Int64" />
+      <Parameter Name="memsid" Mode="In" Type="Int64" />
+      <Parameter Name="RowEffect" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ForumAproveTopic">
+      <Parameter Name="topicId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ForumAproveTopicAns">
+      <Parameter Name="AnsId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ForumUnAproveTopic">
+      <Parameter Name="TopicId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ForumUnAproveTopicAns">
+      <Parameter Name="AnsId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="ResumeMem">
+      <Parameter Name="memsid" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="SuspendMem">
+      <Parameter Name="memsid" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="jobApprove">
+      <Parameter Name="jobid" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="jobUnApprove">
+      <Parameter Name="jobid" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="User_Complaints" EntityType="nextdhoomModel.User_Complaints" />
+    <EntitySet Name="User_Complaints_Comments" EntityType="nextdhoomModel.User_Complaints_Comments" />
+    <FunctionImport Name="User_Complaints_Comments_Add">
+      <Parameter Name="ComplaintsID" Mode="In" Type="Int64" />
+      <Parameter Name="Comments" Mode="In" Type="String" />
+      <Parameter Name="CommentsBy" Mode="In" Type="Int64" />
+      <Parameter Name="CommentsByName" Mode="In" Type="String" />
+      <Parameter Name="IsAdmin" Mode="In" Type="String" />
+      <Parameter Name="CommentsDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Resolved" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="User_Complaints_VerifyUser" ReturnType="Collection(nextdhoomModel.User_Complaints_VerifyUser_Result)">
+      <Parameter Name="mobile" Mode="In" Type="String" />
+      <Parameter Name="EmailID" Mode="In" Type="String" />
+      <Parameter Name="ComplaintsID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="UserComplaints_Comments_Delete">
+      <Parameter Name="CommentID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="UserComplaints_Delete">
+      <Parameter Name="ComplaintsID" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="insertNewCar" ReturnType="Collection(Decimal)">
+      <Parameter Name="memsid" Mode="In" Type="Int64" />
+      <Parameter Name="Makeid" Mode="In" Type="Int64" />
+      <Parameter Name="ModelID" Mode="In" Type="Int64" />
+      <Parameter Name="Version" Mode="In" Type="String" />
+      <Parameter Name="Price" Mode="In" Type="Int64" />
+      <Parameter Name="Pname" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Stateid" Mode="In" Type="Int16" />
+      <Parameter Name="cityid" Mode="In" Type="Int16" />
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="Ldate" Mode="In" Type="DateTime" />
+      <Parameter Name="countryId" Mode="In" Type="Int16" />
+    </FunctionImport>
+    <FunctionImport Name="MyJob_Search" EntitySet="joblistns" ReturnType="Collection(nextdhoomModel.joblistn)">
+      <Parameter Name="criteria" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Job_Search" EntitySet="joblistns" ReturnType="Collection(nextdhoomModel.joblistn)">
+      <Parameter Name="criteria" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="jobbySearchnpage" ReturnType="Collection(nextdhoomModel.jobbySearchnpage_Result)">
+      <Parameter Name="startRowIndex" Mode="In" Type="Int32" />
+      <Parameter Name="maximumRows" Mode="In" Type="Int32" />
+      <Parameter Name="crteria" Mode="In" Type="String" />
+      <Parameter Name="Count" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="memberbySearch" ReturnType="Collection(nextdhoomModel.memberbySearch_Result)">
+      <Parameter Name="startRowIndex" Mode="In" Type="Int32" />
+      <Parameter Name="maximumRows" Mode="In" Type="Int32" />
+      <Parameter Name="crteria" Mode="In" Type="String" />
+      <Parameter Name="Count" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <AssociationSet Name="FK_Mems_jobcategory" Association="nextdhoomModel.FK_Mems_jobcategory">
+      <End Role="jobcategory" EntitySet="jobcategories" />
+      <End Role="Mem" EntitySet="Mems" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="viewprofilemem_Result">
+    <Property Type="String" Name="fname" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="lname" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="countryname" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <EntityType Name="jobcategory">
+    <Key>
+      <PropertyRef Name="jobcategoryid" />
+    </Key>
+    <Property Name="jobcategoryid" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="joblistns" Relationship="nextdhoomModel.FK_joblistn_jobcategory" FromRole="jobcategory" ToRole="joblistn" />
+    <NavigationProperty Name="Mems" Relationship="nextdhoomModel.FK_Mems_jobcategory" FromRole="jobcategory" ToRole="Mem" />
+  </EntityType>
+  <ComplexType Name="jobmemlist_Result">
+    <Property Type="Int64" Name="Jobid" Nullable="false" />
+    <Property Type="Int64" Name="memsid" Nullable="false" />
+    <Property Type="Int16" Name="jobcategoryid" Nullable="false" />
+    <Property Type="DateTime" Name="sysentrydate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="designation" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="jobdescription" Nullable="false" MaxLength="1500" />
+    <Property Type="Int32" Name="minexp" Nullable="false" />
+    <Property Type="Int32" Name="maxexp" Nullable="false" />
+    <Property Type="String" Name="salary" Nullable="false" MaxLength="50" />
+    <Property Type="Int16" Name="countryid" Nullable="false" />
+    <Property Type="Int16" Name="stateid" Nullable="false" />
+    <Property Type="Int16" Name="cityid" Nullable="false" />
+    <Property Type="String" Name="contact" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="telephone" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="website" Nullable="false" MaxLength="150" />
+  </ComplexType>
+  <EntityType Name="joblistn">
+    <Key>
+      <PropertyRef Name="Jobid" />
+    </Key>
+    <Property Name="Jobid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="memsid" Type="Int64" Nullable="false" />
+    <Property Name="jobcategoryid" Type="Int16" Nullable="false" />
+    <Property Name="sysentrydate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="designation" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="jobdescription" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="minexp" Type="Int16" Nullable="false" />
+    <Property Name="maxexp" Type="Int16" Nullable="false" />
+    <Property Name="salary" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="countryid" Type="Int16" Nullable="false" />
+    <Property Name="stateid" Type="Int16" Nullable="false" />
+    <Property Name="cityid" Type="Int16" Nullable="false" />
+    <Property Name="contact" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="telephone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="website" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="citytable" Relationship="nextdhoomModel.FK_joblistn_citytable" FromRole="joblistn" ToRole="citytable" />
+    <NavigationProperty Name="Country" Relationship="nextdhoomModel.FK_joblistn_Country" FromRole="joblistn" ToRole="Country" />
+    <NavigationProperty Name="jobcategory" Relationship="nextdhoomModel.FK_joblistn_jobcategory" FromRole="joblistn" ToRole="jobcategory" />
+    <NavigationProperty Name="Mem" Relationship="nextdhoomModel.FK_joblistn_Mems" FromRole="joblistn" ToRole="Mem" />
+    <NavigationProperty Name="state" Relationship="nextdhoomModel.FK_joblistn_states" FromRole="joblistn" ToRole="state" />
+    <Property Name="isApproved" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_joblistn_citytable">
+    <End Type="nextdhoomModel.citytable" Role="citytable" Multiplicity="1" />
+    <End Type="nextdhoomModel.joblistn" Role="joblistn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="citytable">
+        <PropertyRef Name="cityid" />
+      </Principal>
+      <Dependent Role="joblistn">
+        <PropertyRef Name="cityid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_joblistn_Country">
+    <End Type="nextdhoomModel.Country" Role="Country" Multiplicity="1" />
+    <End Type="nextdhoomModel.joblistn" Role="joblistn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="COUNTRYID" />
+      </Principal>
+      <Dependent Role="joblistn">
+        <PropertyRef Name="countryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_joblistn_jobcategory">
+    <End Type="nextdhoomModel.jobcategory" Role="jobcategory" Multiplicity="1" />
+    <End Type="nextdhoomModel.joblistn" Role="joblistn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="jobcategory">
+        <PropertyRef Name="jobcategoryid" />
+      </Principal>
+      <Dependent Role="joblistn">
+        <PropertyRef Name="jobcategoryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_joblistn_Mems">
+    <End Type="nextdhoomModel.Mem" Role="Mem" Multiplicity="1" />
+    <End Type="nextdhoomModel.joblistn" Role="joblistn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mem">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="joblistn">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_joblistn_states">
+    <End Type="nextdhoomModel.state" Role="state" Multiplicity="1" />
+    <End Type="nextdhoomModel.joblistn" Role="joblistn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="state">
+        <PropertyRef Name="stateid" />
+      </Principal>
+      <Dependent Role="joblistn">
+        <PropertyRef Name="stateid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ForumMainCategory">
+    <Key>
+      <PropertyRef Name="catid" />
+    </Key>
+    <Property Name="catid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="descrip" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="memsid" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Mem" Relationship="nextdhoomModel.FK_ForumMainCategory_Mems1" FromRole="ForumMainCategory" ToRole="Mem" />
+    <NavigationProperty Name="ForumSubCategories" Relationship="nextdhoomModel.FK_ForumSubCategory_ForumMainCategory" FromRole="ForumMainCategory" ToRole="ForumSubCategory" />
+    <NavigationProperty Name="ForumTopics" Relationship="nextdhoomModel.FK_ForumTopic_ForumMainCategory" FromRole="ForumMainCategory" ToRole="ForumTopic" />
+  </EntityType>
+  <EntityType Name="ForumSubCategory">
+    <Key>
+      <PropertyRef Name="SubCatId" />
+    </Key>
+    <Property Name="SubCatId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CatId" Type="Int64" Nullable="false" />
+    <Property Name="SubCatTitle" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="SubCatDesc" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="StartedBy" Type="Int64" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="LastTopic" Type="Int64" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsApprover" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="TotalView" Type="Int64" Nullable="false" />
+    <Property Name="memsid" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="ForumMainCategory" Relationship="nextdhoomModel.FK_ForumSubCategory_ForumMainCategory" FromRole="ForumSubCategory" ToRole="ForumMainCategory" />
+    <NavigationProperty Name="Mem" Relationship="nextdhoomModel.FK_ForumSubCategory_Mems" FromRole="ForumSubCategory" ToRole="Mem" />
+    <NavigationProperty Name="ForumTopics" Relationship="nextdhoomModel.FK_ForumTopic_ForumSubCategory" FromRole="ForumSubCategory" ToRole="ForumTopic" />
+  </EntityType>
+  <EntityType Name="ForumTopic">
+    <Key>
+      <PropertyRef Name="TopicId" />
+    </Key>
+    <Property Name="TopicId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TopicTitle" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TopicDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="catid" Type="Int64" Nullable="false" />
+    <Property Name="SubCatId" Type="Int64" Nullable="false" />
+    <Property Name="UpdateCandiName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateCandiId" Type="Int64" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="LastAnsId" Type="Int64" />
+    <Property Name="IsApproved" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="TotalView" Type="Int64" Nullable="false" />
+    <Property Name="memsid" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="ForumMainCategory" Relationship="nextdhoomModel.FK_ForumTopic_ForumMainCategory" FromRole="ForumTopic" ToRole="ForumMainCategory" />
+    <NavigationProperty Name="ForumSubCategory" Relationship="nextdhoomModel.FK_ForumTopic_ForumSubCategory" FromRole="ForumTopic" ToRole="ForumSubCategory" />
+    <NavigationProperty Name="Mem" Relationship="nextdhoomModel.FK_ForumTopic_Mems" FromRole="ForumTopic" ToRole="Mem" />
+    <NavigationProperty Name="ForumTopicAnswers" Relationship="nextdhoomModel.FK_ForumTopicAnswer_ForumTopic" FromRole="ForumTopic" ToRole="ForumTopicAnswer" />
+  </EntityType>
+  <EntityType Name="ForumTopicAnswer">
+    <Key>
+      <PropertyRef Name="AnsId" />
+    </Key>
+    <Property Name="AnsId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TopicId" Type="Int64" Nullable="false" />
+    <Property Name="TopicAns" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <Property Name="AnsDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsApproved" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="memsid" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="ForumTopic" Relationship="nextdhoomModel.FK_ForumTopicAnswer_ForumTopic" FromRole="ForumTopicAnswer" ToRole="ForumTopic" />
+    <NavigationProperty Name="Mem" Relationship="nextdhoomModel.FK_ForumTopicAnswer_Mems" FromRole="ForumTopicAnswer" ToRole="Mem" />
+  </EntityType>
+  <Association Name="FK_ForumMainCategory_Mems1">
+    <End Type="nextdhoomModel.Mem" Role="Mem" Multiplicity="1" />
+    <End Type="nextdhoomModel.ForumMainCategory" Role="ForumMainCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mem">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="ForumMainCategory">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumSubCategory_ForumMainCategory">
+    <End Type="nextdhoomModel.ForumMainCategory" Role="ForumMainCategory" Multiplicity="1" />
+    <End Type="nextdhoomModel.ForumSubCategory" Role="ForumSubCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForumMainCategory">
+        <PropertyRef Name="catid" />
+      </Principal>
+      <Dependent Role="ForumSubCategory">
+        <PropertyRef Name="CatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumTopic_ForumMainCategory">
+    <End Type="nextdhoomModel.ForumMainCategory" Role="ForumMainCategory" Multiplicity="1" />
+    <End Type="nextdhoomModel.ForumTopic" Role="ForumTopic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForumMainCategory">
+        <PropertyRef Name="catid" />
+      </Principal>
+      <Dependent Role="ForumTopic">
+        <PropertyRef Name="catid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumSubCategory_Mems">
+    <End Type="nextdhoomModel.Mem" Role="Mem" Multiplicity="1" />
+    <End Type="nextdhoomModel.ForumSubCategory" Role="ForumSubCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mem">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="ForumSubCategory">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumTopic_ForumSubCategory">
+    <End Type="nextdhoomModel.ForumSubCategory" Role="ForumSubCategory" Multiplicity="1" />
+    <End Type="nextdhoomModel.ForumTopic" Role="ForumTopic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForumSubCategory">
+        <PropertyRef Name="SubCatId" />
+      </Principal>
+      <Dependent Role="ForumTopic">
+        <PropertyRef Name="SubCatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumTopic_Mems">
+    <End Type="nextdhoomModel.Mem" Role="Mem" Multiplicity="1" />
+    <End Type="nextdhoomModel.ForumTopic" Role="ForumTopic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mem">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="ForumTopic">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumTopicAnswer_ForumTopic">
+    <End Type="nextdhoomModel.ForumTopic" Role="ForumTopic" Multiplicity="1" />
+    <End Type="nextdhoomModel.ForumTopicAnswer" Role="ForumTopicAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ForumTopic">
+        <PropertyRef Name="TopicId" />
+      </Principal>
+      <Dependent Role="ForumTopicAnswer">
+        <PropertyRef Name="TopicId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumTopicAnswer_Mems">
+    <End Type="nextdhoomModel.Mem" Role="Mem" Multiplicity="1" />
+    <End Type="nextdhoomModel.ForumTopicAnswer" Role="ForumTopicAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mem">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="ForumTopicAnswer">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="forumgetAllCategory_Result">
+    <Property Type="Int64" Name="catid" Nullable="false" />
+    <Property Type="String" Name="Category" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="descrip" Nullable="false" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="ForumgetTopics_Result">
+    <Property Type="Int64" Name="TopicId" Nullable="false" />
+    <Property Type="Int64" Name="CatId" Nullable="false" />
+    <Property Type="String" Name="TopicTitle" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="TopicDesc" Nullable="true" />
+    <Property Type="Int64" Name="memsid" Nullable="false" />
+    <Property Type="String" Name="fname" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="starteddate" Nullable="true" MaxLength="10" />
+    <Property Type="Int64" Name="UpdateCandiId" Nullable="true" />
+    <Property Type="String" Name="updatedate" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="ReplayCount" Nullable="true" />
+    <Property Type="String" Name="UpdateCandiName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="Photo" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="updateddate" Nullable="true" MaxLength="10" />
+    <Property Type="Int64" Name="rowid" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="NewsCatmaster">
+    <Key>
+      <PropertyRef Name="catid" />
+    </Key>
+    <Property Name="catid" Type="Int32" Nullable="false" />
+    <Property Name="category" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Jokescatmaster">
+    <Key>
+      <PropertyRef Name="catid" />
+    </Key>
+    <Property Name="catid" Type="Int32" Nullable="false" />
+    <Property Name="category" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_Jokes" Relationship="nextdhoomModel.FK_tbl_Jokes_Jokescatmaster" FromRole="Jokescatmaster" ToRole="tbl_Jokes" />
+    <NavigationProperty Name="tbl_Jokes1" Relationship="nextdhoomModel.FK_tbl_Jokes_Jokescatmaster1" FromRole="Jokescatmaster" ToRole="tbl_Jokes" />
+  </EntityType>
+  <EntityType Name="tbl_Jokes">
+    <Key>
+      <PropertyRef Name="Jokesid" />
+    </Key>
+    <Property Name="Jokesid" Type="Int64" Nullable="false" />
+    <Property Name="memsid" Type="Int64" Nullable="false" />
+    <Property Name="Jokesdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Jokessub" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="JokesDesc" Type="String" Nullable="false" MaxLength="8000" FixedLength="false" Unicode="false" />
+    <Property Name="Jokespic" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ipaddress" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="IsApproved" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="categoryId" Type="Int32" Nullable="false" />
+    <Property Name="TotalView" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Jokescatmaster" Relationship="nextdhoomModel.FK_tbl_Jokes_Jokescatmaster" FromRole="tbl_Jokes" ToRole="Jokescatmaster" />
+    <NavigationProperty Name="Jokescatmaster1" Relationship="nextdhoomModel.FK_tbl_Jokes_Jokescatmaster1" FromRole="tbl_Jokes" ToRole="Jokescatmaster" />
+    <NavigationProperty Name="Mem" Relationship="nextdhoomModel.FK_tbl_Jokes_Mems" FromRole="tbl_Jokes" ToRole="Mem" />
+    <NavigationProperty Name="Mem1" Relationship="nextdhoomModel.FK_tbl_Jokes_Mems1" FromRole="tbl_Jokes" ToRole="Mem" />
+    <NavigationProperty Name="Mem2" Relationship="nextdhoomModel.FK_tbl_Jokes_Mems2" FromRole="tbl_Jokes" ToRole="Mem" />
+  </EntityType>
+  <Association Name="FK_tbl_Jokes_Jokescatmaster">
+    <End Type="nextdhoomModel.Jokescatmaster" Role="Jokescatmaster" Multiplicity="1" />
+    <End Type="nextdhoomModel.tbl_Jokes" Role="tbl_Jokes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jokescatmaster">
+        <PropertyRef Name="catid" />
+      </Principal>
+      <Dependent Role="tbl_Jokes">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Jokes_Jokescatmaster1">
+    <End Type="nextdhoomModel.Jokescatmaster" Role="Jokescatmaster" Multiplicity="1" />
+    <End Type="nextdhoomModel.tbl_Jokes" Role="tbl_Jokes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jokescatmaster">
+        <PropertyRef Name="catid" />
+      </Principal>
+      <Dependent Role="tbl_Jokes">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Jokes_Mems">
+    <End Type="nextdhoomModel.Mem" Role="Mem" Multiplicity="1" />
+    <End Type="nextdhoomModel.tbl_Jokes" Role="tbl_Jokes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mem">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="tbl_Jokes">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Jokes_Mems1">
+    <End Type="nextdhoomModel.Mem" Role="Mem" Multiplicity="1" />
+    <End Type="nextdhoomModel.tbl_Jokes" Role="tbl_Jokes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mem">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="tbl_Jokes">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Jokes_Mems2">
+    <End Type="nextdhoomModel.Mem" Role="Mem" Multiplicity="1" />
+    <End Type="nextdhoomModel.tbl_Jokes" Role="tbl_Jokes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mem">
+        <PropertyRef Name="memsid" />
+      </Principal>
+      <Dependent Role="tbl_Jokes">
+        <PropertyRef Name="memsid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="User_Complaints">
+    <Key>
+      <PropertyRef Name="ComplaintID" />
+    </Key>
+    <Property Name="ComplaintID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserMobile" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="EmailID" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ComplaintHead" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ComplaintDesc" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <Property Name="ComplaintDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsResolved" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="ResolvedDate" Type="DateTime" Precision="3" />
+    <Property Name="ResolvedBy" Type="Int64" Nullable="false" />
+    <Property Name="ResolvedByName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="User_Complaints_Comments">
+    <Key>
+      <PropertyRef Name="CommentsID" />
+    </Key>
+    <Property Name="CommentsID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ComplaintsID" Type="Int64" Nullable="false" />
+    <Property Name="Comments" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <Property Name="CommentsBy" Type="Int64" Nullable="false" />
+    <Property Name="CommentsByName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="IsAdmin" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="CommentsDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <ComplexType Name="User_Complaints_VerifyUser_Result">
+    <Property Type="Int64" Name="ComplaintID" Nullable="false" />
+    <Property Type="String" Name="UserMobile" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="EmailID" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="ComplaintHead" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="ComplaintDesc" Nullable="false" MaxLength="5000" />
+    <Property Type="DateTime" Name="ComplaintDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="IsResolved" Nullable="false" MaxLength="1" />
+    <Property Type="DateTime" Name="ResolvedDate" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="ResolvedBy" Nullable="false" />
+    <Property Type="String" Name="ResolvedByName" Nullable="false" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="jobbySearchnpage_Result">
+    <Property Type="Int64" Name="Jobid" Nullable="true" />
+    <Property Type="String" Name="designation" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="jobdescription" Nullable="true" MaxLength="2000" />
+    <Property Type="Int32" Name="minexp" Nullable="true" />
+    <Property Type="Int32" Name="maxexp" Nullable="true" />
+    <Property Type="DateTime" Name="sysentrydate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="category" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="cityname" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="countryname" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="statename" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="fname" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="gimg" Nullable="true" MaxLength="650" />
+    <Property Type="Int32" Name="rowid" Nullable="true" />
+    <Property Type="Int64" Name="memsid" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="memberbySearch_Result">
+    <Property Type="Int64" Name="memsid" Nullable="true" />
+    <Property Type="String" Name="gimg" Nullable="true" MaxLength="650" />
+    <Property Type="String" Name="fname" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="lname" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="gender" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="aboutme" Nullable="true" MaxLength="450" />
+    <Property Type="String" Name="countryname" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="statename" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="cityname" Nullable="true" MaxLength="250" />
+    <Property Type="Int32" Name="rowid" Nullable="true" />
+    <Property Type="DateTime" Name="regdate" Nullable="true" Precision="16" />
+    <Property Type="String" Name="susp" Nullable="true" MaxLength="1" />
+  </ComplexType>
+  <Association Name="FK_Mems_jobcategory">
+    <End Type="nextdhoomModel.jobcategory" Role="jobcategory" Multiplicity="0..1" />
+    <End Type="nextdhoomModel.Mem" Role="Mem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="jobcategory">
+        <PropertyRef Name="jobcategoryid" />
+      </Principal>
+      <Dependent Role="Mem">
+        <PropertyRef Name="jobcategoryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

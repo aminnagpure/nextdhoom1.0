@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebApplication13.Models.ViewTopicModel>
+
+@{
+    ViewBag.Title = "ViewUnAproveTopic";
+}
+
+<h2>ViewUnAproveTopic</h2>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TopicTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TopicDesc)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fname)<br />
+                <a href="@Url.Action("viewprofile", "ContentManage", new { id = @item.memsid }, null)"> <img src="@item.Photo" /></a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TopicTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TopicDesc)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.ActionLink("Approve", "AproveTopic", "ContentManage", new { id = item.TopicId },null) | @Html.ActionLink("Delete", "deleTopic", "ContentManage", new { id = item.TopicId }, null) @*deleTopic*@
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.Partial("_MessageBox")
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

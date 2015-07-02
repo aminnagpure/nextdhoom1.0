@@ -1,0 +1,22 @@
+﻿@model IEnumerable<WebApplication13.Models.ForumMainCategory>
+
+@{
+    ViewBag.Title = "Forum";
+}
+
+<h2>Forum</h2>
+
+<div class="row" >
+    @foreach (var item in Model)
+    {
+        <div class="pull-left col-md-3"    >
+
+            <a href="@Url.Action("subcategories", "Forum", new { id= @item.catid }) "> <div class=" alert alert-danger text-center text-capitalize"  > @Html.DisplayFor(htmlitem => item.Category) </div></a>
+        </div>
+    }
+</div>
+
+
+
+            
+       

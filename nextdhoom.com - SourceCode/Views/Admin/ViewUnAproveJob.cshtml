@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebApplication13.Models.joblistn>
+
+@{
+    ViewBag.Title = "ViewUnAproveJob";
+}
+
+<h2>ViewUnAproveJob</h2>
+
+
+<table class="table">
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td width="30%">
+
+                @Html.ActionLink(item.Mem.fname + " " + item.Mem.lname, "ViewProfile", "ContentManage", new { id = item.Mem.memsid }, null)<br />
+                <img src="@item.Mem.gimg" /> <br />
+                Posted on:@Html.DisplayFor(modelItem => item.sysentrydate)<br />
+
+                Exp:@Html.DisplayFor(modelItem => item.minexp)-
+                @Html.DisplayFor(modelItem => item.maxexp)<br />
+
+                @Html.DisplayFor(modelItem => item.Country.countryname)<br />
+                @Html.DisplayFor(modelItem => item.state.statename)<br />
+                @Html.DisplayFor(modelItem => item.citytable.cityname)<br />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.jobcategory.category)<br />
+
+                @Html.ActionLink(item.designation, "details", "Jobs", new { id = item.Jobid }, null)<br />
+                <div style="overflow:hidden;text-overflow:ellipsis">
+                  
+                    @Html.Raw("<p>" + (@item.jobdescription.ToString().Length <= 500 ? item.jobdescription : item.jobdescription.ToString().Substring(0, 500)) + "</p>")
+                </div>
+            </td>
+            <td>
+                @Html.ActionLink("Approve", "ApproveJob", "ContentManage", new { id = item.Jobid }, null) <div style="position: relative; /* bottom: 0px; */ top: 120px;"> @Html.ActionLink("Delete", "DeleJob", "ContentManage", new { id = item.Jobid }, null)</div>
+            </td>
+
+        </tr>
+    }
+
+</table>
+@Html.Partial("_MessageBox")
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

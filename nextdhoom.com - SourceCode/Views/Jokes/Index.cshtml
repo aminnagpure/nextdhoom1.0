@@ -1,0 +1,99 @@
+﻿@model IEnumerable<WebApplication13.Models.tbl_Jokes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Jokesdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jokessub)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JokesDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jokespic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipaddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsApproved)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalView)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jokescatmaster.category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jokescatmaster1.category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mem.fname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mem1.fname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mem2.fname)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jokesdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jokessub)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JokesDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jokespic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipaddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsApproved)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalView)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jokescatmaster.category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jokescatmaster1.category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mem.fname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mem1.fname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mem2.fname)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Jokesid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Jokesid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Jokesid })
+        </td>
+    </tr>
+}
+
+</table>

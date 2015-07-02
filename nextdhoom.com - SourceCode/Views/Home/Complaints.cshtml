@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WebApplication13.Models.User_Complaints>
+
+@{
+    ViewBag.Title = "Complaints";
+}
+
+<h2>Complaints/Support </h2>
+<br />
+
+<p>
+    @Html.ActionLink("Raise A Ticket", "AddComplain")
+</p>
+<table width="100%">
+    <tr>
+
+        <th>Issues</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        var clsstyle = (item.IsResolved == "Y") ? "panel-success" : "panel-default";
+        <tr>
+
+            <td class=" "  >
+                <div class="panel @clsstyle">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Subject : @Html.DisplayFor(modelItem => item.ComplaintHead)</h3>
+                    </div>
+                    <div class="panel-body">
+                        @Html.DisplayFor(modelItem => item.ComplaintDesc)
+                        
+                        <div class="small" >By : @Html.DisplayFor(modelItem => item.UserName) <span class="pull-right">@Html.DisplayFor(modelItem => item.ComplaintDate)</span></div>
+                     
+                      
+                    </div>
+                    <div class="panel-footer text-right"  >
+                        @if (@Request.Cookies["memsid"] != null && @Request.Cookies["memsid"].Value == "14")
+                        {
+                            <span >  <a href="@Url.Action("deleComplaint","Home", new { id = @item.ComplaintID },null)"><i class="glyphicon glyphicon-trash"></i></a> | </span>
+                        }
+                        <span >@Html.ActionLink("View & Reply", "ReplyComplaint", new { id = @item.ComplaintID }, false) </span>
+                        </div>
+                    </div>
+
+               
+                    
+                    
+                    
+                
+
+            </td>
+
+        </tr>
+    }
+
+</table>
+@Html.Partial("_MessageBox")

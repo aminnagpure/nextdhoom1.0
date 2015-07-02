@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebApplication13.Models.Mem>
+
+@{
+    ViewBag.Title = "ViewSuspMem";
+}
+
+<h2>ViewSuspMem</h2>
+
+
+<table class="table">
+   
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <h2>Profile of @item.fname</h2>
+
+            <div>
+
+               
+                <table class="table" >
+                    <tr>
+                        <td align="left">
+                            <img src="@item.gimg" />
+                        </td>
+                        <td>&nbsp;&nbsp;</td>
+                        <td>
+                            @item.fname &nbsp;
+                            @item.lname <br />
+                            Gender : @item.gender<br />
+                            @item.Country.countryname
+                            &nbsp; @item.state.statename
+                            &nbsp; @item.citytable.cityname
+                        </td>
+                        <td colspan="3">
+                            @item.aboutme
+                        </td>
+
+                        <td>
+                            <p>
+                                @if (item.susp == "Y")
+                                {
+                                    @Html.ActionLink("Resume", "ResumeUser", new { id = @item.memsid }, false);
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Suspend", "suspendUser", new { id = @item.memsid }, false);
+                                }
+
+                            </p>
+                        </td>
+                    </tr>
+                                        
+                </table>
+            </div>
+            
+
+        </td>
+    </tr>
+}
+
+</table>
+@Html.ActionLink("Back to List", "Index")

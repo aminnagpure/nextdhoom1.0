@@ -1,0 +1,36 @@
+﻿@model WebApplication13.Models.PagedData<WebApplication13.Models.ViewTopicModel>
+
+@{
+    ViewBag.Title = "ViewAprovedTopics";
+
+    Layout = null;
+
+}
+
+
+
+
+<script src="@Url.Content("~/Scripts/jquery-2.1.1.min.js")" type="text/javascript"></script>
+        <script type="text/javascript">
+            $().ready(function () {
+                $(".page-number").click(function () {
+
+                    var page = parseInt($(this).html());
+
+                    $.ajax({
+                        url: '@Url.Action("ViewAprovedTopics")',
+                        data: { "page": page },
+                        success: function (data) {
+                            $("#person-list").html(data);
+                        }
+                    });
+                });
+            });
+        </script>
+        <div id="person-list">
+            @Html.Partial("_UnaprovedTopic")
+        </div>
+
+        @Html.Partial("_MessageBox")
+
+        

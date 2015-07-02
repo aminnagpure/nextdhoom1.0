@@ -1,0 +1,125 @@
+﻿@model WebApplication13.Models.replyComplaint
+
+@{
+    ViewBag.Title = "ReplyComplaint";
+
+    ViewBag.email = @Model.user_complaints.EmailID;
+}
+
+<h2>Reply Complaints</h2>
+<hr />
+<table width="100%">
+    <tr>
+        <td>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sub : @Model.user_complaints.ComplaintHead</h3>
+                </div>
+                <div class="panel-body">
+                    <p>@Model.user_complaints.ComplaintDesc</p>
+                    @if (@Request.Cookies["memsid"] != null && @Request.Cookies["memsid"].Value == "14")
+                    {
+                        <div> email : <span>@Model.user_complaints.EmailID </span></div>
+                        <div>
+                            Mobile : <span>@Model.user_complaints.UserMobile</span>
+                        </div>
+                    }
+                </div>
+                <div class="panel-footer small">
+                    By: <span class="text-info ">@Model.user_complaints.UserName</span>
+                    <span class="text-info text-muted pull-right ">On:@Model.user_complaints.ComplaintDate </span>
+                </div>
+            </div>
+
+
+
+
+        </td>
+    </tr>
+</table>
+@if (ViewBag.mem == true)
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.user_complaints_comments.CommentsBy)
+            @Html.HiddenFor(model => model.user_complaints.ComplaintID)
+            @Html.HiddenFor(model => model.user_complaints.EmailID)
+            @Html.HiddenFor(model => model.user_complaints.ComplaintDesc)
+            @Html.HiddenFor(model => model.user_complaints.ComplaintDate)
+            @Html.HiddenFor(model => model.user_complaints.ComplaintHead)
+            @Html.HiddenFor(model => model.user_complaints_comments.CommentsID)
+
+          
+
+
+            <div class="form-group">
+                @Html.Label("Name", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.user_complaints_comments.CommentsByName)
+                    @Html.ValidationMessageFor(model => model.user_complaints_comments.CommentsByName)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.user_complaints_comments.Comments, new { @class = "control-label col-md-2" })
+                <div class="col-xs-4">
+                    @Html.TextAreaFor(model => model.user_complaints_comments.Comments)
+                    @Html.ValidationMessageFor(model => model.user_complaints_comments.Comments)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label(" ", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBox("resoled", false) @Html.Label("Mark As Resolved")
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@if (@Model.replyComments != null)
+{
+    <table style="width:100%">
+        <tr>
+            <th>Replies:</th>
+        </tr>
+        @foreach (var item in @Model.replyComments)
+        {
+            <tr>
+                <td>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>@item.Comments</p>
+
+                        </div>
+                        <div class="panel-footer small">
+                            by:<span>@item.CommentsByName</span>
+
+                            @if (@Request.Cookies["memsid"] != null && @Request.Cookies["memsid"].Value == "14")
+                            {
+                                <span class="pull-right">   | <a href="@Url.Action("deleRply","Home", new { id = @item.CommentsID, cid = @item.ComplaintsID },null)"><i class="glyphicon glyphicon-trash"></i></a></span>
+                            }
+                            <span class="pull-right">@item.CommentsDate </span>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@Html.Partial("_MessageBox")
+
+<div>
+    @Html.ActionLink("Back to List", "Complaints")
+</div>

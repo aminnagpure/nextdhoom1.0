@@ -1,0 +1,56 @@
+﻿@model WebApplication13.Models.ForumSubCategory
+
+@{
+    ViewBag.Title = "InsertSubCategory";
+}
+
+<h2>InsertSubCategory</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>ForumSubCategory</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CatId, "CatId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CatId", ViewBag.category as IEnumerable<SelectListItem>,new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.CatId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubCatTitle, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubCatTitle,new { htmlAttributes = new { @class = "form-control input-sm" } })
+                @Html.ValidationMessageFor(model => model.SubCatTitle)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubCatDesc, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.SubCatDesc, new { @class = "form-control input-sm" } )
+                @Html.ValidationMessageFor(model => model.SubCatDesc)
+            </div>
+        </div>
+         
+        @ViewBag.errmessage
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+       
+    </div>
+}
+@Html.Partial("_MessageBox")
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

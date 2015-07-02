@@ -1,0 +1,220 @@
+﻿@model WebApplication13.Models.membersview.ViewEditRegi
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true)
+        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fname, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fname)
+                @Html.ValidationMessageFor(model => model.fname)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.lname, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.lname)
+                @Html.ValidationMessageFor(model => model.lname)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Gender)
+                @Html.ValidationMessageFor(model => model.Gender)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.email)
+                @Html.ValidationMessageFor(model => model.email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.passw, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.passw)
+                @Html.ValidationMessageFor(model => model.passw)
+            </div>
+        </div>
+
+       
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.countryid, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("countryid")
+                @Html.ValidationMessageFor(model => model.countryid)
+               
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.stateid,  new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("stateid")
+                @Html.ValidationMessageFor(model => model.stateid)
+                
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cityid, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("cityid")
+                @Html.ValidationMessageFor(model => model.cityid)
+            </div>
+        </div>
+
+      
+        <div class="form-group">
+            @Html.LabelFor(model => model.aboutme, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.aboutme, new { rows = 10, cols = 300 })
+                @Html.ValidationMessageFor(model => model.aboutme)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.isJobseeker, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="isJobseeker" name="isJobseeker" type="checkbox" value="Y" checked='@(Model.isJobseeker=="Y") ? "checked" : ""' />
+                <input name="isJobseeker" type="hidden" value="N" /><span>Yes</span>
+                @Html.ValidationMessageFor(model => model.isJobseeker)
+
+
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.jobcategoryid, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("jobcategoryid", "Select Category")
+                @Html.ValidationMessageFor(model => model.jobcategoryid)
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.designation, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.designation)
+                @Html.ValidationMessageFor(model => model.designation)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+    <script type="text/jscript">
+        $(function () {
+
+
+            $('#countryid').ready(function () {
+
+               var stid = $('#stateid').val();
+              //  alert(stid);
+                $.getJSON('/Kas/StateList/' + $('#countryid').val(), function (data) {
+                    var items = '';
+                    $.each(data, function (i, stateid) {
+                        items += "<option value='" + stateid.Value + "'>" + stateid.Text + "</option>";
+                    });
+                    $('#stateid').html(items);
+                    $('#stateid').val(stid);
+
+                });
+            });
+
+
+            $('#stateid').ready(function () {
+                //var stid = $('#stateid').val();
+                //if (stid == 0)
+                //{
+                //    stid = 5;
+                //}
+                //alert(stid);
+                
+                
+                ////$('#stateid').empty();
+                ////$('#cityid').empty();
+
+                //$.getJSON('/Kas/StateList/' + $('#countryid').val(), function (data) {
+                //    var items = '';
+                //    $.each(data, function (i, stateid) {
+                //        items += "<option value='" + stateid.Value + "'>" + stateid.Text + "</option>";
+                //    });
+
+
+                //    $('#stateid').html(items);
+                //    $('#stateid').val(stid);
+                //    $('#stateid').trigger("change")
+
+
+                //});
+            });
+
+
+
+            $('#countryid').change(function () {
+
+                $.getJSON('/Kas/StateList/' + $('#countryid').val(), function (data) {
+                    var items = '';
+                    $.each(data, function (i, stateid) {
+                        items += "<option value='" + stateid.Value + "'>" + stateid.Text + "</option>";
+                    });
+                    $('#stateid').html(items);
+
+                });
+            });
+
+            $('#stateid').change(function () {
+                var citid = $('#cityid').val();
+
+                $.getJSON('/Kas/Citylist/' + $('#stateid').val(), function (data) {
+                    var items = '';
+                    $.each(data, function (i, cityid) {
+                        items += "<option value='" + cityid.Value + "'>" + cityid.Text + "</option>";
+                    });
+                    $('#cityid').html(items);
+                    //$('#cityid').val(citid);
+
+
+
+
+                });
+            });
+
+
+
+
+
+        });
+
+    </script>
+</div>

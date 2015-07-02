@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebApplication13.Models.getForum>
+
+@{
+    ViewBag.Title = @Model.Select(p => p.Category ).FirstOrDefault();
+}
+
+<h2>@Model.Select(p => p.Category).FirstOrDefault()</h2>
+
+<table class="table table-striped" >
+   
+
+@foreach (var i in Model)
+{
+
+    <tr>
+        <td width="500px">
+            <a href="@Url.Action("topics", "forum" , new { id=i.SubCatId }, null)">
+                <h6>@Html.DisplayFor(modelItem => i.SubCatTitle)</h6>
+            </a> <br />
+            @Html.DisplayFor(modelItem => i.SubCatDesc)
+        </td>
+        <td>
+            threads: @Html.DisplayFor(modelItem => i.TopicsCount)<br />
+
+            replies: @Html.DisplayFor(modelItem => i.ReplyCount)
+        </td>
+        <td width="60px">
+
+
+            <a href="@Url.Action("viewprofile", "Members" , new { id=i.UpdatedBy }, null)"><img src="@i.photo" /></a>
+        </td>
+        <td>
+            <a href="@Url.Action("ViewTopic", "forum", new { id = i.LastTopic, catid = i.catid  }, null)">
+                @Html.DisplayFor(modelItem => i.TopicTitle)
+            </a>
+            <br />
+
+            By:@Html.DisplayFor(modelItem => i.fname) <span class="pull-right text-muted">On : @Html.DisplayFor(modelItem => i.lastupdate)</span>
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => i.photopassw)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => i.UpdatedByName)
+        </td>
+
+    </tr>
+
+}
+
+</table>

@@ -1,0 +1,140 @@
+﻿@model WebApplication13.Models.jobsbyPaging 
+
+@{
+    ViewBag.Title = "ManageJobs";
+    
+ int totalcount = Convert.ToInt32(Model.TotalCount);
+    WebGrid grid = new WebGrid(rowsPerPage: Model.pagesize, ajaxUpdateContainerId: "grid2");
+    grid.Bind(Model.data,
+              autoSortAndPage: false,
+              rowCount: totalcount
+
+    );
+
+}
+
+
+<style>
+    .table tfoot td a {
+        padding: 2px 8px;
+        background-color: #EBEBEB;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        color: #888888;
+        font-size: smaller;
+    }
+
+    .table#gridpager thead th a {
+        padding: 2px 8px;
+        background-color: #EBEBEB;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        color: #888888;
+        font-size: smaller;
+    }
+</style>
+<div class="page-header">
+    <h2>ManageJobs</h2>
+    <p>
+        @Html.ActionLink("Post New Job", "Create")
+    </p>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Jobs
+        </div>
+        <div class="panel-body">
+
+
+
+
+
+
+
+
+
+
+            <p class="small"> <b>@Html.Label("Total records: ")</b> @Html.Label(grid.TotalRowCount.ToString())</p>
+            <table class="table table-striped" id="gridpager">
+                <thead>
+                    <tr>
+                        <th>  @grid.Pager()</th>
+                    </tr>
+                </thead>
+            </table>
+            @grid.GetHtml(htmlAttributes: new { id = "grid2" },
+    fillEmptyRows: false,
+                 tableStyle: "table table-striped ",
+
+        mode: WebGridPagerModes.All,
+columns: new[] {
+      grid.Column("Name",
+
+                 format:
+                @<text> <a href="@Url.Action("ViewProfile", "members", new { id = item.memsid })"> @item.fname</a>
+                <br /><div><img src="@item.gimg" class="img-thumbnail thumbnail" /></div>
+
+                </text>
+                ),
+    //grid.Column("fname","Name"),
+    //grid.Column("Category"),
+    //grid.Column("designation"),
+    //grid.Column("jobdescription"),
+    //item.YourField.ToString().Length <= n ? item.YourField.ToString() : item.YourField.ToString().SubString(0,n) + "..."
+    grid.Column("jobdescription", "Description", format:@<text>
+        <h4><a href="@Url.Action("details", "Jobs", new { id = item.Jobid })">@item.designation</a><small>(@item.Category)</small></h4>
+        <p>@(item.jobdescription.ToString().Length <= 500 ? item.jobdescription : item.jobdescription.ToString().Substring(0, 500))</p>
+        <p class="text-right"><small>@item.sysentrydate</small> || <small>Exp : @item.minexp - @item.maxexp</small> || <small>Location : @item.countryname - @item.statename - @item.cityname</small>||<small>@Html.ActionLink("Edit", "Edit", new { id = item.Jobid }) ||
+
+@Html.ActionLink("Delete", "Delete", new { id = item.Jobid })</small></p>
+    </text>),
+
+   
+
+})
+
+        </div>
+        
+    </div>
+
+</div>
+
+
+@*<table class="table">
+    <tr>
+        <th>
+            Posted Date
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.designation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jobdescription)
+        </th>
+        <th></th>
+        
+        
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.sysentrydate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.designation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.jobdescription)
+            </td>
+          
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Jobid }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Jobid }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Jobid })
+            </td>
+        </tr>
+    }
+
+</table>*@
+

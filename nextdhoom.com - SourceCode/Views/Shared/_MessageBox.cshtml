@@ -1,0 +1,22 @@
+﻿
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        toastr.options = {
+            "closeButton": false,
+            "positionClass": "toast-bottom-left",
+            "onclick": null,
+            "showDuration": "0",
+            "hideDuration": "0",
+            "timeOut": "0",
+            "showMethod": "fadeIn"
+        };
+
+        @if (ViewBag.Success == true) {
+            @:toastr.success("@ViewBag.Message");
+        } else if (ViewBag.Success == false) {
+            @:toastr.error("@ViewBag.Message");
+        }
+
+    });
+</script>

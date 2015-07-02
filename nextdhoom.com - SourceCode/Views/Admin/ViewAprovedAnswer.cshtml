@@ -1,0 +1,62 @@
+﻿
+
+@model IEnumerable<WebApplication13.Models.TopicAnsModel>
+
+@{
+    ViewBag.Title = "ViewAprovedAnswer";
+}
+
+<h2>ViewAprovedAnswer</h2>
+<table class="table table-striped">
+
+    @if (@Model.Count() > 0)
+    {
+
+        foreach (var item in Model)
+        {
+            var img = item.gimg;
+
+
+
+            <tr>
+                <td valign="top" class="UserDetails" style="width: 150px;">
+
+                    <a href="@Url.Action("viewprofile", "ContentManage", new { id = @item.memsid }, null)"><img src="@img" /></a>
+                    <div>
+                        @Html.DisplayFor(model => item.fname)
+
+                    </div>
+
+                </td>
+                <td>
+                    <div>
+                        <strong>Re:</strong>
+                    </div>
+
+                    <div>
+                        @Html.DisplayFor(model => item.TopicAns)
+                        <span class="pull-right text-muted">@Html.DisplayFor(model => item.AnsDate)</span>
+                    </div>
+
+                </td>
+                <td style="width: 50px;">
+                    @Html.ActionLink("UnApprove", "UnAproveAns","ContentManage", new { id = @item.AnsId }, false)
+                </td>
+            </tr>
+
+        }
+    }
+    else
+    {
+        
+            <tr>
+                <td>No Replies</td>
+            </tr>
+       
+    }
+</table>
+
+@Html.Partial("_MessageBox")
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

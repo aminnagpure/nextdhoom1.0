@@ -1,0 +1,64 @@
+﻿
+
+@model IEnumerable<WebApplication13.Models.joblistn>
+
+@{
+    ViewBag.Title = "ViewAproveJob";
+}
+
+<h2>ViewAproveJob</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading"></div>
+    <div class="panel-body"></div>
+    <ul class="list-group">
+      
+
+
+
+
+
+        @foreach (var item in Model)
+    {
+          <li class="list-group-item">
+
+            @Html.ActionLink(item.Mem.fname + " " + item.Mem.lname, "ViewProfile", "ContentManage", new { id = item.Mem.memsid }, null)
+              <div>
+                  <img src="@item.Mem.gimg" />
+              </div>
+                    Posted on:@Html.DisplayFor(modelItem => item.sysentrydate)
+           
+
+                    Exp:@Html.DisplayFor(modelItem => item.minexp)-
+                    @Html.DisplayFor(modelItem => item.maxexp)
+                        
+
+                        @Html.DisplayFor(modelItem => item.Country.countryname) -
+                    @Html.DisplayFor(modelItem => item.state.statename) -
+                    @Html.DisplayFor(modelItem => item.citytable.cityname)
+                    <br />
+                
+                    
+                        @Html.DisplayFor(modelItem => item.jobcategory.category)<br />
+                        @Html.DisplayFor(modelItem => item.designation)
+                        @*@Html.ActionLink(item.designation, "details", "Jobs", new { id = item.Jobid }, null)*@<br />
+                        <div style="overflow:hidden;text-overflow:ellipsis">
+                            
+                            @Html.Raw("<p>"+(@item.jobdescription.ToString().Length <= 500 ? item.jobdescription : item.jobdescription.ToString().Substring(0, 500)) + "...</p>")
+                       
+                    </div>
+                    
+                        @Html.ActionLink("Un-Approve", "UnApproveJob", "ContentManage", new { id = item.Jobid }, null)
+                 
+
+            </li>
+    }
+    </ul>
+    </table>
+
+    <div class="panel-footer"></div>
+</div>
+@Html.Partial("_MessageBox")
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

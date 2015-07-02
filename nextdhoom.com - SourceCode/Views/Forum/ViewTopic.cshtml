@@ -1,0 +1,181 @@
+﻿@model WebApplication13.Models.VTopicModel
+@{
+    if (@Model.Vtp != null)
+    {
+        ViewBag.Title = Model.Vtp.TopicTitle;
+        var gimg = @Model.Vtp.Photo;
+    }
+    else
+    {
+        ViewBag.Title = "Reply Topic";
+        var gimg = "";
+    }
+}
+<style>
+    textarea {
+        width: 500px;
+        height: 100px;
+    }
+
+    input {
+        width: 500px;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        toastr.options = {
+            "closeButton": false,
+            "positionClass": "toast-bottom-left",
+            "onclick": null,
+            "showDuration": "0",
+            "hideDuration": "0",
+            "timeOut": "0",
+            "showMethod": "fadeIn"
+        };
+
+        @if (ViewBag.Success == true) {
+            @:toastr.success("@ViewBag.Message");
+        } else if (ViewBag.Success == false) {
+            @:toastr.error("@ViewBag.Message");
+        }
+    });
+</script>
+
+<h2>ViewTopic</h2>
+@if (@Model.Vtp != null)
+{
+    <table class="table table-bordered" width="100%">
+        <tr class="theader">
+
+            <td colspan="2">
+                @Html.DisplayFor(model => model.Vtp.StartDate)
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="UserDetails" style="width: 150px;">
+
+                <a href="@Url.Action("viewprofile", "Members" , new { id= @Model.Vtp.memsid }, null)"><img src="@Model.Vtp.Photo" /></a>
+                <div>
+                    @Html.DisplayFor(model => model.Vtp.fname)
+
+                </div>
+                <div>
+                    total Threads:@Html.DisplayFor(model => model.Vtp.TotalThread)<br />
+                    total replies: @Html.DisplayFor(model => model.Vtp.TotalReplay)
+                </div>
+            </td>
+            <td>
+                <div>
+                    <strong>@Html.DisplayFor(model => model.Vtp.TopicTitle)</strong>
+                </div>
+                <hr size="1" style="color:#CECECE; background-color:#CECECE">
+                <div>
+                    @*@Html.DisplayFor(model => model.Vtp.TopicDesc)*@
+
+                    @{string description = @Model.Vtp.TopicDesc.Replace(Environment.NewLine, "<br />");}
+                    @Html.Raw("<p>" + @description + "</p>")
+                </div>
+
+            </td>
+        </tr>
+    </table>
+}
+<button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo">
+    Reply
+</button>
+@{
+    <h4 class="text-danger" >@ViewBag.ermessage</h4>
+
+
+}
+<div id="demo" class="collapse">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Reply Topic</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.insAns.TopicAns, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.insAns.TopicAns)
+                    @Html.ValidationMessageFor(model => model.insAns.TopicAns)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Reply" class="btn btn-default" />
+                </div>
+            </div>
+
+          
+        </div>
+    }
+</div>
+
+@if (Model.TpAns != null )
+{
+
+    foreach (var item in Model.TpAns)
+    {
+        var img = item.gimg;
+        var memid = 0;
+        if (Request.Cookies["memsid"] != null)
+        {
+            memid = Convert.ToInt32(Request.Cookies["memsid"].Value);
+        }
+        <table class="table table-striped">
+            <tr class="theader">
+
+                <td colspan="2">
+                    @Html.DisplayFor(model => item.AnsDate)
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="UserDetails" style="width: 150px;">
+
+                    <a href="@Url.Action("viewprofile", "Members" , new { id= @item.memsid }, null)"><img src="@img" /></a>
+                    <div>
+                        @Html.DisplayFor(model => item.fname)
+
+                    </div>
+
+                </td>
+                <td>
+                    <div>
+                        <strong>Re:</strong>
+                    </div>
+                    <hr size="1" style="color:#CECECE; background-color:#CECECE">
+                    <div>
+                        @Html.DisplayFor(model => item.TopicAns)
+                        @if (memid == item.memsid)
+                        {
+                            <span class="pull-right">
+                                @Html.ActionLink("Delete", "delAns", "Forum", new { id = item.AnsId }, false)
+
+                            </span>
+                        }
+                    </div>
+
+                </td>
+
+            </tr>
+        </table>
+    }
+
+
+}
+else
+{
+    <table class="table table-striped">
+        <tr>
+            <td>No Replies</td>
+        </tr>
+    </table>
+}

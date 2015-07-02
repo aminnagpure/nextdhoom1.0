@@ -1,0 +1,184 @@
+﻿@model WebApplication13.Models.jobsbyPaging
+
+@{
+    ViewBag.Title = "Search Jobs";
+
+
+    int totalcount = Convert.ToInt32(Model.TotalCount);
+    WebGrid grid = new WebGrid(rowsPerPage: Model.pagesize, ajaxUpdateContainerId: "grid2");
+    grid.Bind(Model.data,
+              autoSortAndPage: false,
+              rowCount: totalcount
+
+    );
+
+}
+
+<style>
+    .table tfoot td a {
+        padding: 2px 8px;
+        background-color: #EBEBEB;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        color: #888888;
+        font-size: smaller;
+    }
+
+    .table#gridpager thead th a {
+        padding: 2px 8px;
+        background-color: #EBEBEB;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        color: #888888;
+        font-size: smaller;
+    }
+</style>
+<div class="page-header">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Jobs
+        </div>
+        <div class="panel-body">
+
+            @using (Html.BeginForm("SearchJobs", "Jobs", FormMethod.Get))
+            {
+                <div class="row">
+                    <div class="col-lg-3 col-mg-3">
+                        Country
+                        @Html.DropDownList("countryid", ViewBag.countryid as SelectList, "Select a Country", new { @style = "width:180px" })
+                    </div>
+                    <div class="col-lg-3 col-mg-3">
+                        State
+                        @Html.DropDownList("stateid", null, string.Empty, new { @style = "width:180px" })
+                    </div>
+                    <div class="col-lg-3 col-mg-3">
+                        City
+                        @Html.DropDownList("cityid", null, string.Empty, new { @style = "width:180px" })
+                    </div>
+                    <div class="col-lg-3 col-mg-3">
+                        Job Category
+                        @Html.DropDownList("jobcategoryid", ViewBag.jobcategoryid as SelectList, "Select a Category", new { @style = "width:180px" })
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-3 col-mg-3 pull-right" >
+                        <button class="btn btn-sm" type="submit">
+                            <i class="glyphicon glyphicon-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+               
+            }
+
+
+
+
+        </div>
+
+        <p class="small"> <b>@Html.Label("Total records: ")</b> @Html.Label(grid.TotalRowCount.ToString())</p>
+        <table class="table table-striped" id="gridpager">
+            <thead>
+                <tr>
+                    <th>  @grid.Pager()</th>
+                </tr>
+            </thead>
+        </table>
+        @grid.GetHtml(htmlAttributes: new { id = "grid2" },
+    fillEmptyRows: false,
+                 tableStyle: "table table-striped ",
+
+        mode: WebGridPagerModes.All,
+columns: new[] {
+      grid.Column("Name",
+
+                 format:
+                @<text> <a href="@Url.Action("ViewProfile", "members", new { id = item.memsid })"> @item.fname</a>
+                <br /><div><img src="@item.gimg" class="img-thumbnail thumbnail" /></div>
+
+                </text>
+                ),
+    //grid.Column("fname","Name"),
+    //grid.Column("Category"),
+    //grid.Column("designation"),
+    //grid.Column("jobdescription"),
+    //item.YourField.ToString().Length <= n ? item.YourField.ToString() : item.YourField.ToString().SubString(0,n) + "..."
+    grid.Column("jobdescription", "Description", format:@<text>
+        <h4><a href="@Url.Action("details", "Jobs", new { id = item.Jobid })">@item.designation</a><small>(@item.Category)</small></h4>
+        <p>@(item.jobdescription.ToString().Length <= 500 ? item.jobdescription : item.jobdescription.ToString().Substring(0, 500))</p>
+        <p class="text-right"><small>@item.sysentrydate</small> || <small>Exp : @item.minexp - @item.maxexp</small> || <small>Location : @item.countryname - @item.statename - @item.cityname</small></p>
+    </text>),
+        @*grid.Column("minexp","Experience",
+            format:@<text> </text>
+            ),*@
+    //grid.Column("maxexp"),
+    //grid.Column("sysentrydate"),
+    // grid.Column("countryname"),
+    //grid.Column("statename"),
+    //grid.Column("cityname"),
+
+
+
+})
+
+
+        
+    </div>
+
+</div>
+
+<script type="text/jscript">
+    $(function () {
+
+        $('#countryid').ready(function () {
+
+
+            //$('#stateid').empty();
+            //$('#cityid').empty();
+
+            $.getJSON('/Kas/StateList/' + $('#countryid').val(), function (data) {
+                var items = "";
+                $.each(data, function (i, stateid) {
+                    items += "<option value='" + stateid.Value + "'>" + stateid.Text + "</option>";
+                });
+
+                $('#stateid').html(items);
+                $('#stateid').trigger("change");
+
+            });
+        });
+
+
+
+        $('#countryid').change(function () {
+
+            $.getJSON('/Kas/StateList/' + $('#countryid').val(), function (data) {
+                var items = '';
+                $.each(data, function (i, stateid) {
+                    items += "<option value='" + stateid.Value + "'>" + stateid.Text + "</option>";
+                });
+                $('#stateid').html(items);
+
+            });
+        });
+
+        $('#stateid').change(function () {
+            $.getJSON('/Kas/Citylist/' + $('#stateid').val(), function (data) {
+                var items = '';
+                $.each(data, function (i, cityid) {
+                    items += "<option value='" + cityid.Value + "'>" + cityid.Text + "</option>";
+                });
+                $('#cityid').html(items);
+
+
+
+            });
+        });
+
+
+
+
+
+    });
+
+</script>

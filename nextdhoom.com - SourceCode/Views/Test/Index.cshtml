@@ -1,0 +1,73 @@
+﻿@model WebApplication13.Models.nextdhoomEntities
+
+@{ 
+    ViewBag.Title = "Index";
+    
+    
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.DropDownList("Country", ViewBag.CountryId as SelectList)<br />
+   
+    <select id="State" name="state"></select><br />
+    <select id="city" name="City"></select><br />
+}
+
+Add Jquery to view:
+
+
+<script type="text/jscript">
+    $(function () {
+
+        $('#Country').ready(function () {
+
+            $.getJSON('/Kas/StateList/' + $('#Country').val(), function (data) {
+                var items = '';
+                $.each(data, function (i, state) {
+                    items += "<option value='" + state.Value + "'>" + state.Text + "</option>";
+                });
+                
+                $('#State').html(items);
+                $('#Country').val(2);
+                $('#State').empty();
+                $('#State').trigger("change");
+
+            });
+        });
+
+        
+        
+        $('#Country').change(function () {
+            $.getJSON('/Kas/StateList/' + $('#Country').val(), function (data) {
+                var items = '<option>Select a State</option>';
+                $.each(data, function (i, state) {
+                    items += "<option value='" + state.Value + "'>" + state.Text + "</option>";
+                });
+                $('#State').html(items);
+                
+            });
+        });
+
+        $('#State').change(function () {
+            $.getJSON('/Kas/Citylist/' + $('#State').val(), function (data) {
+                var items = '';
+                $.each(data, function (i, city) {
+                    items += "<option value='" + city.Value + "'>" + city.Text + "</option>";
+                });
+                $('#city').html(items);
+               
+                
+
+            });
+        });
+
+      
+        
+
+        
+    });
+    
+</script>

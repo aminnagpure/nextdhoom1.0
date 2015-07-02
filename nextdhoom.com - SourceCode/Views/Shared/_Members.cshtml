@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - NextDhoom.com</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script src="~/js/jquery.navgoco.js"></script>
+    <style>
+        /*new things added*/
+        a.nav-expander {
+            background: none repeat scroll 0 0 #EB6864;
+            color: #FFFFFF;
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            height: 50px;
+            margin-right: 0;
+            padding: 1em 1.6em 2em;
+            position: absolute;
+            right: 0;
+            text-decoration: none;
+            text-transform: uppercase;
+            top: 0;
+            transition: right 0.3s ease-in-out 0s;
+            width: 130px;
+            z-index: 12;
+            transition: right 0.3s ease-in-out 0s;
+            -webkit-transition: right 0.3s ease-in-out 0s;
+            -moz-transition: right 0.3s ease-in-out 0s;
+            -o-transition: right 0.3s ease-in-out 0s;
+        }
+
+            a.nav-expander:hover {
+                cursor: pointer;
+            }
+
+            a.nav-expander.fixed {
+                position: fixed;
+            }
+
+        .nav-expanded a.nav-expander.fixed {
+            right: 20em;
+        }
+
+
+        nav {
+            background: #EB6864;
+            color: #FFFFFF;
+            display: block;
+            height: 100%;
+            overflow: auto;
+            position: fixed;
+            right: -20em;
+            font-size: 15px;
+            top: 0;
+            width: 20em;
+            z-index: 2000;
+            transition: right 0.3s ease-in-out 0s;
+            -webkit-transition: right 0.3s ease-in-out 0s;
+            -moz-transition: right 0.3s ease-in-out 0s;
+            -o-transition: right 0.3s ease-in-out 0s;
+        }
+
+        .nav-expanded nav {
+            right: 0;
+        }
+
+        body.nav-expanded {
+            margin-left: 0em;
+            transition: right 0.4s ease-in-out 0s;
+            -webkit-transition: right 0.4s ease-in-out 0s;
+            -moz-transition: right 0.4s ease-in-out 0s;
+            -o-transition: right 0.4s ease-in-out 0s;
+        }
+
+        #nav-close {
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-weight: 300;
+            font-size: 24px;
+            padding-right: 10px;
+        }
+
+
+        .main-menu1 {
+            padding-top: 12px;
+        }
+
+            .main-menu1 li {
+                border-bottom: 1px solid #323949;
+                margin-left: 20px;
+                font-size: 18px;
+                padding: 12px;
+            }
+
+                .main-menu1 li a {
+                    color: white;
+                    text-decoration: none;
+                }
+
+                    .main-menu1 li a:hover {
+                        color: aqua;
+                        text-decoration: none;
+                    }
+
+                .main-menu1 li .sub-nav {
+                    border-bottom: 0px;
+                    padding: 4px;
+                }
+
+            .main-menu1 a .caret1 {
+                width: 0;
+                height: 0;
+                display: inline-block;
+                vertical-align: top;
+                border-top: 4px solid #4f5963;
+                border-right: 4px solid transparent;
+                border-left: 4px solid transparent;
+                content: "";
+                margin-top: 8px;
+            }
+
+            .main-menu1 a:hover .caret1 {
+                border-top-color: #4f5963;
+            }
+
+            .main-menu1 li.open > a > .caret1 {
+                border-top: none;
+                border-bottom: 4px solid #4f5963;
+                border-right: 4px solid transparent;
+                border-left: 4px solid transparent;
+            }
+
+            .main-menu1 li.open > a:hover > .caret1 {
+                border-bottom-color: #4f5963;
+            }
+
+        .icon:before {
+            font-family: 'FontAwesome';
+            font-style: normal;
+            font-variant: normal;
+            font-weight: normal;
+            line-height: 1;
+            text-transform: none;
+            content: '\f105';
+        }
+
+        .main-menu1 li > a > span.icon {
+            float: right;
+            margin: 0.1em 1.7em -0.1em 0;
+            opacity: 0;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .main-menu1 li > a:hover > span.icon {
+            float: right;
+            margin: 0.1em 0.8em -0.1em 0;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="pull-left">
+   
+    <nav>
+        <ul class="list-unstyled main-menu1">
+
+            <!--Include your navigation here-->
+            <li class="text-right"><a href="#" id="nav-close">X</a></li>
+
+            <li>
+                <a href="#">Account</a>
+                <ul class="list-unstyled">
+                    <li class="sub-nav">
+                        <span class="icon"> @Html.ActionLink("Edit", "Edit", "Members")</span>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">Chat/Video chat</a>
+                <ul class="list-unstyled">
+                    <li class="sub-nav">
+                        <span class="icon"> @Html.ActionLink("Video Calls", "vchat", "members")</span>
+                    </li>
+                    @*<li class="sub-nav">
+                                                <span class="icon">@Html.ActionLink("Chat ", "chat", "members")</span>
+                        </li>*@
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">Video Conference</a>
+                <ul class="list-unstyled">
+                    <li class="sub-nav">
+                        <span class="icon">
+                            @Html.ActionLink("Video Conference ", "groupvideo", "members", new { abc = "groupvideo" }, null)
+                        </span>
+                    </li>
+                    <li class="sub-nav">
+                        <span class="icon">
+                            @Html.ActionLink("Pvt Video Conference ", "groupvideopvt", "members")
+
+                        </span>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">Jobs</a>
+                <ul class="list-unstyled">
+                    <li class="sub-nav">
+                        <span class="icon"> @Html.ActionLink("Post Job", "Create", "Jobs")</span>
+                    </li>
+
+                    <li class="sub-nav">
+                        <span class="icon"> @Html.ActionLink("Manage Jobs", "ManageJobs", "Jobs")</span>
+                    </li>
+
+                    <li class="sub-nav">
+                        <span class="icon"> @Html.ActionLink("Browse Jobs", "index", "jobs")</span>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">Classifieds(Buy/Sell)</a>
+                <ul class="list-unstyled">
+                    <li class="sub-nav">
+                        <span class="icon">
+                            @Html.ActionLink("Classifieds", "index", "classifieds")
+                        </span>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">Directory Listings</a>
+                <ul class="list-unstyled">
+                    <li class="sub-nav">
+                        <span class="icon">
+                            @Html.ActionLink("Classifieds", "index", "classifieds")
+                        </span>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </nav>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-brand">
+
+        </div>
+        <div class="navbar-header pull-left">
+            @Html.Partial("_LoginPartial")
+        </div>
+        <div class="navbar-header pull-right">
+
+            <a id="nav-expander" class="nav-expander fixed">
+                MENU &nbsp;<i class="fa fa-bars fa-lg white"></i>
+            </a>
+
+
+        </div>
+
+    </div>
+
+    <div class="container body-content">
+        <!--Partion of cotent page row-->
+        <div class="row">
+            <br />
+            <br />
+            <br />
+        </div>
+        <div class="col-md-2 hidden-sm hidden-xs">
+            <img src="http://placehold.it/120X600/333/fff/&text=Ads 120X600" />
+          
+
+        </div>
+        <!--part for main content-->
+        <div class="col-md-9">
+            <center>
+                <img src="http://placehold.it/728X90/333/fff/&text=Ads 728X90" />
+               
+            </center> <br />
+           
+            
+            @RenderBody()
+         
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - amincode.com</p>
+            </footer>
+        </div>
+
+
+
+    </div>
+    <div class="row">
+
+        <center>
+            <img src="http://placehold.it/728X90/333/fff/&text=Ads 728X90" />
+        </center>
+        <br />
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            //Navigation Menu Slider
+            $('#nav-expander').on('click', function (e) {
+                e.preventDefault();
+                $('body').toggleClass('nav-expanded');
+            });
+            $('#nav-close').on('click', function (e) {
+                //alert("va close");
+                e.preventDefault();
+                $('body').removeClass('nav-expanded');
+            });
+
+            // Initialize navgoco with default options
+            $(".main-menu1").navgoco({
+                caret: '<span class="caret"></span>',
+                accordion: false,
+                openClass: 'open',
+                save: true,
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 300,
+                    easing: 'swing'
+                }
+            });
+
+        });
+
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0; i<ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1);
+                    if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+                }
+                return "";
+            }
+            var scam = getCookie("scammer")
+
+            if (scam != "")
+            {
+                var url = '@Url.Action("Scammer","Home") ';
+                window.location.href = url;
+            }
+        });
+
+    </script>
+</body>
+</html>

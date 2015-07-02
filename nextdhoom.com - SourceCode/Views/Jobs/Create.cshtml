@@ -1,0 +1,224 @@
+﻿@model WebApplication13.Models.joblistn
+
+@{
+    ViewBag.Title = "Create";
+    
+    
+}
+<script type='text/javascript'
+        src='http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js'></script>
+<script type='text/javascript'>
+    $(document).ready(function () {
+        $('#jobdescription').keyup(function () {
+            var len = this.value.length;
+            if (len >= 1090) {
+                this.value = this.value.substring(0, 1090);
+            }
+            $('#charLeft').text(1090 - len);
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        toastr.options = {
+            "closeButton": false,
+            "positionClass": "toast-bottom-left",
+            "onclick": null,
+            "showDuration": "0",
+            "hideDuration": "0",
+            "timeOut": "0",
+            "showMethod": "fadeIn"
+        };
+
+        @if (ViewBag.Success == true) {
+            @:toastr.success("@ViewBag.Message");
+        } else if (ViewBag.Success == false) {
+            @:toastr.error("@ViewBag.Message");
+        }
+    });
+</script>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+       
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            
+            
+                @Html.Hidden("memsid",@Convert.ToInt32(Request.Cookies["memsid"].Value))
+            
+        </div>
+
+        <div class="form-group">
+            @Html.Hidden("sysentrydate", @DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day)
+            <div class = "control-label col-md-3">
+                <b>Job Category</b>
+            </div> 
+            <div class="col-md-9">
+                @Html.DropDownList("jobcategoryid",string.Empty)
+                @Html.ValidationMessageFor(model => model.jobcategoryid)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.designation, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.designation, new { style = "width:750px" })
+                @Html.ValidationMessageFor(model => model.designation)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.jobdescription, new { @class = "control-label col-md-3" })
+
+            <div class="col-md-9">
+                @Html.TextAreaFor(model => model.jobdescription, new { rows = 20, cols = 250 })
+                <br />(Maximum charactor limit 2000)
+                <span id="charLeft"> </span>  Characters left
+                @Html.ValidationMessageFor(model => model.jobdescription)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-3">
+                Experience
+            </div>
+            <div class="col-md-9">
+                
+                @Html.EditorFor(model => model.minexp) - @Html.EditorFor(model => model.maxexp)
+                @Html.ValidationMessageFor(model => model.minexp)                
+                @Html.ValidationMessageFor(model => model.maxexp)
+            </div>
+        </div>
+
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.salary, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.salary, new { style = "width:750px" })
+                @Html.ValidationMessageFor(model => model.salary)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class = "control-label col-md-3">
+                Country
+            </div>
+            <div class="col-md-9">
+                @Html.DropDownList("countryid")
+                @Html.ValidationMessageFor(model => model.countryid)<br /><br />
+
+                @Html.DropDownList("stateid")<br /><br />
+
+                @Html.ValidationMessageFor(model => model.stateid)
+
+                @Html.DropDownList("cityid")<br /><br />
+
+                @Html.ValidationMessageFor(model => model.cityid)
+            </div>
+        </div>
+
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.contact, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.contact, new { style = "width:750px" })
+                @Html.ValidationMessageFor(model => model.contact)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.telephone, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.telephone, new { style = "width:750px" })
+                @Html.ValidationMessageFor(model => model.telephone)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.email, new { style = "width:750px" })
+                @Html.ValidationMessageFor(model => model.email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.website, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.website, new { style = "width:750px" })
+                @Html.ValidationMessageFor(model => model.website)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" value="Post Job" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script type="text/jscript">
+    $(function () {
+
+        $('#countryid').ready(function () {
+
+            
+            $('#stateid').empty();
+            $('#cityid').empty();
+
+            $.getJSON('/Kas/StateList/' + $('#countryid').val(), function (data) {
+                var items = '';
+                $.each(data, function (i, stateid) {
+                    items += "<option value='" + stateid.Value + "'>" + stateid.Text + "</option>";
+                });
+
+                $('#stateid').html(items);               
+                $('#stateid').trigger("change");
+
+            });
+        });
+
+
+
+        $('#countryid').change(function () {
+           
+            $.getJSON('/Kas/StateList/' + $('#countryid').val(), function (data) {
+                var items = '<option>Select a State</option>';
+                $.each(data, function (i, stateid) {
+                    items += "<option value='" + stateid.Value + "'>" + stateid.Text + "</option>";
+                });
+                $('#stateid').html(items);
+
+            });
+        });
+
+        $('#stateid').change(function () {
+            $.getJSON('/Kas/Citylist/' + $('#stateid').val(), function (data) {
+                var items = '';
+                $.each(data, function (i, cityid) {
+                    items += "<option value='" + cityid.Value + "'>" + cityid.Text + "</option>";
+                });
+                $('#cityid').html(items);
+
+
+
+            });
+        });
+
+
+
+
+
+    });
+
+</script>
